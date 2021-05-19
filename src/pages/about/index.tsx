@@ -1,0 +1,74 @@
+import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+
+import { getStatement, getBio } from '@services/contentful';
+import { AboutProps } from '@type/contentful';
+import useWindowDimensions from '@hooks/useWindowDimensions';
+
+import aboutStyles from './about.module.css';
+
+const About = (props: AboutProps): JSX.Element => {
+
+    //making seperate paragraphs from each newline in statement
+    const statement = props.statement.statement.split('\n').map((s, i) => <p key={i}>{s}</p>);
+
+    const { width } = useWindowDimensions();
+
+    return (
+        <div>
+            <Head >
+                <title>About me</title>
+                <meta name='description' content='I am a Helsinki-based artist who mainly works with oilpaints. 
+                Currently, I am particulary interested in portraying people in
+                my works. On the background, I have a solid understanding 
+                of the living model, aqcuired from my studies, as well as an academic degree
+                in painting.' />
+            </Head>
+            {width > 950 ? <nav id='about-me-nav'>
+                <ul>
+                    <li><a href='#about'>About me</a></li>
+                    <li><a href='#curriculum'>Curriculum</a></li>
+                    <li><a href='#statement'>Statement</a></li>
+                </ul>
+            </nav> : null}
+            <div className={aboutStyles.About}>
+                <section id='about' className={aboutStyles.bio}>
+                    <article>
+                        <h2>{props.bio.title}</h2>
+                        <p>{props.bio.bio}</p>
+                    </article>
+                    <div>
+                        <Image
+                            src="/profile-heli.png"
+                            alt="Picture of the author"
+                            width={300}
+                            height={300}
+                        />
+                    </div>
+                </section>
+                <hr></hr>
+                <section id='curriculum'>
+                    {/*lang === 'fi' ? cvTranslation.cvFi() : cvTranslation.cvEn()*/}
+                </section>
+                <hr></hr>
+                <section id='statement'>
+                    <h2>{props.statement.title}</h2>
+                    <article><p>{statement}</p></article>
+                </section>
+                <hr></hr>
+            </div>
+        </div>
+    );
+};
+
+export const getStaticProps: GetStaticProps = async context => {
+    return {
+        props: {
+            bio: await getBio(context.locale),
+            statement: await getStatement(context.locale)
+        }
+    };
+};
+
+export default About;

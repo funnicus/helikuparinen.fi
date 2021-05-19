@@ -1,0 +1,39 @@
+.About {
+    max-width: 700px;
+    margin: auto;
+
+    padding: 10px;
+}
+
+.bio {
+    display: flex;
+}
+
+.bio > article {
+    width: 50%;
+}
+
+.About > section > h2 {
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .bio  {
+        flex-direction: column;
+    }
+
+    .bio > article {
+        width: 100%;
+    }
+}
+
+@keyframes fadeInAbout {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -0.2%, 0);
+    }
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}

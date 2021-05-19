@@ -1,0 +1,25 @@
+#about-me-nav {
+    position: sticky;
+    top: 40vh;
+    z-index: 1;
+    height: 10vh;
+}
+
+#about-me-nav ul {
+    margin: 0;
+    padding: 20px;
+}
+
+#about-me-nav li {
+  margin-top: 20px;
+}
+
+
+#about-me-nav ul li a {
+    transition: color, 0.3s;
+    color: gray;
+}
+
+#about-me-nav ul li a:hover {
+    color: black;
+}
