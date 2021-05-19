@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+
+.Header {
+    text-align: center;
+    margin-top: 15%;
+	font-family: sans-serif;
+	height: 100vh;
+}
+
+.Header h1 {
+    font-size: 3em;
+    font-family: 'Parisienne', 'cursive';
+    margin: auto;
+}
+
+.HeaderText {
+    animation: fadeInHeader 2s ease-in both;
+}
+
+@media only screen and (max-width: 770px) {
+	.Header {
+		padding-top: 40%;
+	}
+}
+
+@keyframes fadeInHeader {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, -20%, 0);
+    }
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}

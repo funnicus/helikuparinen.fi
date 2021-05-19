@@ -1,0 +1,27 @@
+{
+  "name": "helikuparinen.fi",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ./ --ext js,jsx,ts,tsx"
+  },
+  "dependencies": {
+    "contentful": "^8.3.5",
+    "next": "10.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-icons": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^15.3.0",
+    "@types/react": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.26.0",
+    "eslint-plugin-react": "^7.23.2",
+    "typescript": "^4.2.4"
+  }
+}

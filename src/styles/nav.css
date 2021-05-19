@@ -1,0 +1,125 @@
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .Navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .Navbar li {
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  
+  #Left li {
+    float: left;
+  }
+  
+  #Right li {
+    float: right;
+    margin-right: 20px;
+    margin-top: 30px;
+  }
+  
+  #Right button {
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+  }
+  
+  #Right button:hover {
+    background-color: rgb(244, 244, 244);
+    cursor: pointer;
+  }
+  
+  #dropdown-btn {
+    display: none;
+    margin-left: auto;
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    font-size: 2em;
+  }
+  
+  #dropdown-btn:hover {
+    background-color: rgb(244, 244, 244);
+    cursor: pointer;
+  }
+  
+  #Navbar-fadein li {
+    animation: fadeIn 1s ease-in both;
+  }
+  
+  #Navbar-fadein li:nth-child(1) {
+  animation-delay: 2s;
+  }
+  #Navbar-fadein li:nth-child(2) {
+    animation-delay: 2.1s;
+  }
+  #Navbar-fadein li:nth-child(3) {
+    animation-delay: 2.2s;
+  }
+  #Navbar-fadein li:nth-child(4) {
+    animation-delay: 2.3s;
+  }
+  #Navbar-fadein #Right li:nth-child(1) {
+    animation-delay: 3s;
+  }
+  #Navbar-fadein #Right li:nth-child(2) {
+    animation-delay: 3s;
+  }
+  
+  .Navbar li a {
+    display: block;
+    color: #242424;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: sans-serif;
+  }
+  
+  .Navbar li a:hover {
+    background-color: rgb(244, 244, 244);
+  }
+  
+    @keyframes fadeIn {
+      from {
+          opacity: 0;
+          transform: translate3d(0, -20%, 0);
+      }
+      to {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+      }
+  }
+  
+  @media only screen and (max-width: 770px) {
+    .Navbar {
+      flex-direction: column;
+    }
+  
+    #Left {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    #Right {
+      display: flex;
+      flex-direction: row;
+      margin: auto;
+    }
+  
+    #dropdown-btn {
+      display: block;
+    }
+  }
+  @media only screen and (min-width: 770px) {
+    .Navbar {
+      display: flex;
+    }
+  }
+  
