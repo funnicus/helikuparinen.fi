@@ -1,6 +1,9 @@
 .Navbar {
     display: flex;
     justify-content: space-between;
+    background: rgba(#000000, #000000, #000000, .5);
+    opacity: 0.2;
+    width: 100%;
   }
   
   .Navbar ul {
@@ -120,6 +123,9 @@
   @media only screen and (min-width: 770px) {
     .Navbar {
       display: flex;
+      position: fixed;
+      top: 0;
+      z-index: 1;
     }
   }
   
