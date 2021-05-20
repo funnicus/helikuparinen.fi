@@ -2,7 +2,7 @@
 
 Next version (pun intended) website for the painter and my mom, **Heli Kuparinen**!
 
-As the last pargraph suggests, this site is created using **Next.js**, for better SEO than the old [CRApp](https://github.com/funnicus/helikuparinenhomepage) (it's time to stop, no offense to CRA though)! Easier content managment is achieved trough contentful!
+As the last paragraph suggests, this site is created using **Next.js**, for better SEO than the old [CRApp](https://github.com/funnicus/helikuparinenhomepage) (it's time to stop, no offense to CRA though)! Easier content managment is achieved trough contentful!
 
 ## Developing this site 🚀
 

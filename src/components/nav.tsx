@@ -11,7 +11,7 @@ const Nav = ({ id, lang, setLang, setFadein }: NavProps): JSX.Element => {
     const toggleMenu = () => setStyle(!style);
 
     return (
-        <div>
+        <div style={{ background: '#f7f7f7' }}>
             <button id='dropdown-btn' onClick={toggleMenu}>{!style ? <FaTimes /> : <FaBars />}</button>
             <nav id={id} className="Navbar" style={style && width < 770 ? { display: 'none' } : { display: 'flex' }}>
                 <ul id='Left'>

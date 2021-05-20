@@ -4,7 +4,6 @@ import Layout from '@components/layout';
 
 import '@styles/globals.css';
 import '@styles/nav.css';
-import '@styles/home.css';
 import '@styles/about.css';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {

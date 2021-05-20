@@ -1,9 +1,9 @@
 .Navbar {
     display: flex;
     justify-content: space-between;
-    background: rgba(#000000, #000000, #000000, .5);
-    opacity: 0.2;
+    background: #f7f7f7;
     width: 100%;
+    color: white;
   }
   
   .Navbar ul {
@@ -29,13 +29,13 @@
   }
   
   #Right button {
-    border-radius: 5px;
-    background-color: white;
+    background: #f7f7f7;
     border: none;
+    height: 30px;
   }
   
   #Right button:hover {
-    background-color: rgb(244, 244, 244);
+    background: white;
     cursor: pointer;
   }
   
@@ -43,13 +43,13 @@
     display: none;
     margin-left: auto;
     border-radius: 5px;
-    background-color: white;
+    background: #f7f7f7;
     border: none;
     font-size: 2em;
   }
   
   #dropdown-btn:hover {
-    background-color: rgb(244, 244, 244);
+    color: #1b1b1b;
     cursor: pointer;
   }
   
@@ -86,7 +86,7 @@
   }
   
   .Navbar li a:hover {
-    background-color: rgb(244, 244, 244);
+    background-color: #ffffff;
   }
   
     @keyframes fadeIn {

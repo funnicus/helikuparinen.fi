@@ -1,26 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
-
 .Header {
     text-align: center;
-    margin-top: 15%;
 	font-family: sans-serif;
 	height: 100vh;
+	background: white url("../../public/last.jpg") no-repeat;
+	background-size: cover;
+}
+
+.Header hgroup {
+	height: 100%;
+
+    padding: 35vh 0 0;
+
+   	background: rgba(10, 4, 4, 0.6);
+	
+	color: #e9e2d9;
+
+	text-shadow: 2px 2px #222222;
 }
 
 .Header h1 {
     font-size: 3em;
     font-family: 'Parisienne', 'cursive';
+
     margin: auto;
+
+	color: #fff8ee;
 }
 
-.HeaderText {
+.Header h1, .Header h3 {
     animation: fadeInHeader 2s ease-in both;
-}
-
-@media only screen and (max-width: 770px) {
-	.Header {
-		padding-top: 40%;
-	}
 }
 
 @keyframes fadeInHeader {
