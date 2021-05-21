@@ -1,10 +1,11 @@
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import indexStyles from './index.module.css';
 
 export default function Home(): JSX.Element {
 
-    const lang = 'fi';
+    const { locale } = useRouter();
 
     return (
         <header className={indexStyles.Header}>
@@ -14,7 +15,7 @@ export default function Home(): JSX.Element {
             </Head>
             <hgroup>
                 <h1>Heli Kuparinen</h1>
-                <h3>{lang === 'fi' ? 'Taidemaalari' : 'A Painter'}</h3>
+                <h3>{locale === 'fi-FI' ? 'Taidemaalari' : 'A Painter'}</h3>
             </hgroup>
         </header>
     );

@@ -1,5 +1,7 @@
 import * as contentful from 'contentful';
 
+//import fs from 'fs';
+
 export const client = contentful.createClient({
     space: process.env.SPACE_ID,
     accessToken: process.env.ACCESS_TOKEN,
@@ -27,6 +29,17 @@ export const getStatement = async (locale: string): Promise<{
     });
     console.log(response.items);
     return (response?.items as Statement[])[0].fields;
+};
+
+export const getGallery = async (locale: string): Promise<void> => {
+    const response = await client.getEntries({
+        content_type: 'gallery',
+        locale,
+    });
+
+    console.log(response.items[0]);
+
+    //fs.writeFileSync('data.json', JSON.stringify(response.items[0]));
 };
 
 export type Biography = contentful.Entry<{

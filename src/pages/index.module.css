@@ -11,11 +11,9 @@
 
     padding: 35vh 0 0;
 
-   	background: rgba(10, 4, 4, 0.6);
+   	background: rgba(184, 175, 175, 0.3);
 	
-	color: #e9e2d9;
-
-	text-shadow: 2px 2px #222222;
+	color: #000000;
 }
 
 .Header h1 {
@@ -24,7 +22,7 @@
 
     margin: auto;
 
-	color: #fff8ee;
+	color: #000000;
 }
 
 .Header h1, .Header h3 {

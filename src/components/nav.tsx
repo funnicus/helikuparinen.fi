@@ -1,46 +1,37 @@
 import React, { useState } from 'react';
-//import '../styles/nav.css';
+import { useRouter } from 'next/router';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 
-const Nav = ({ id, lang, setLang, setFadein }: NavProps): JSX.Element => {
+const Nav = (): JSX.Element => {
+
     const [style, setStyle] = useState(true);
+
+    const { locale, pathname } = useRouter();
     const { width } = useWindowDimensions();
 
     const toggleMenu = () => setStyle(!style);
 
+    const text = locale === 'fi-FI' ? 'In English' : 'Suomeksi';
+    const nextLocale = locale === 'fi-FI' ? 'en-US' : 'fi-FI';
+
     return (
         <div style={{ background: '#f7f7f7' }}>
             <button id='dropdown-btn' onClick={toggleMenu}>{!style ? <FaTimes /> : <FaBars />}</button>
-            <nav id={id} className="Navbar" style={style && width < 770 ? { display: 'none' } : { display: 'flex' }}>
+            <nav className="Navbar" style={style && width < 770 ? { display: 'none' } : { display: 'flex' }}>
                 <ul id='Left'>
-                    <li onClick={() => setFadein('none')}><Link href="/">Heli Kuparinen</Link></li>
-                    <li onClick={() => setFadein('none')}><Link href="/about">{lang === 'fi' ? 'Tietoa minusta' : 'About me' }</Link></li>
-                    <li onClick={() => setFadein('none')}><Link href="/paintings">{lang === 'fi' ? 'Teokset' : 'Paintings' }</Link></li>
-                    <li onClick={() => setFadein('none')}><Link href="/contact">{lang === 'fi' ? 'Ota yhteyttä' : 'Contact me' }</Link></li>
+                    <li><Link href="/">Heli Kuparinen</Link></li>
+                    <li><Link href="/about">{locale === 'fi-FI' ? 'Tietoa minusta' : 'About me' }</Link></li>
+                    <li><Link href="/paintings">{locale === 'fi-FI' ? 'Teokset' : 'Paintings' }</Link></li>
+                    <li><Link href="/contact">{locale === 'fi-FI' ? 'Ota yhteyttä' : 'Contact me' }</Link></li>
                 </ul>
                 <ul id='Right'>
-                    <li><button onClick={() => setLang('fi')}>FI</button></li>
-                    <li><button onClick={() => setLang('en')}>EN</button></li>
+                    <li><Link href={pathname} locale={nextLocale}>{text}</Link></li>
                 </ul>
             </nav>
         </div>
     );
-};
-
-interface NavProps {
-    id: string;
-    lang: string;
-    setLang: (lang: string) => any;
-    setFadein: (fade: string) => any;
-}
-
-Nav.defaultProps = {
-    id: 'none',
-    lang: 'fi',
-    setLang: (lang) => lang,
-    setFadein: (fade) => fade
 };
 
 export default Nav;

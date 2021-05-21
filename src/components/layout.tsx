@@ -7,7 +7,7 @@ const Layout: FC<Props> = ({ children }) => {
         <>
             <Nav />
             <main>{children}</main>
-            <footer>
+            <footer style={{ padding: '1vh', textAlign: 'center' }}>
                 <span>Copyright © Heli Kuparinen {new Date().getFullYear()}</span>
             </footer>
         </>
