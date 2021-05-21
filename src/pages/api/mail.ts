@@ -1,11 +1,7 @@
 import nodemailer from 'nodemailer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-
-function validateEmail(email: string) {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
+import validateEmail from '@helpers/validateEmail';
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     if(req.method === 'POST'){
