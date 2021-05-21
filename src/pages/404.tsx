@@ -1,8 +1,9 @@
 import {  FC } from 'react';
+import CSS from 'csstype';
 
 const NotFound: FC = () => {
 
-    const style = { 
+    const style: CSS.Properties = { 
         height: '100vh', 
         fontSize: '3em', 
         textAlign: 'center',

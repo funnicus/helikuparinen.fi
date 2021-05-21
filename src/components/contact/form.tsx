@@ -28,7 +28,7 @@ const Form = ({
                     </button>
                 </div>
                 <textarea
-                    type="text"
+                    itemType='text'
                     id='content'
                     value={content}
                     name="Content"
