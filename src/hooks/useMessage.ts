@@ -4,9 +4,9 @@ export default function useMessage(): UseMessage {
     const [ message, setMessage ] = useState('');
     const [ style, setStyle ] = useState({});
 
-    const error = { border: '1px solid red' };
-    const ok = { border: '1px solid green' };
-    const warning = { border: '1px solid yellow' };
+    const error = { border: '1px solid red', display: 'block' };
+    const ok = { border: '1px solid green', display: 'block' };
+    const warning = { border: '1px solid yellow', display: 'block' };
 
     function messageTimeout(style: MessageStyle, message: string) {
         setMessage(message);
@@ -22,8 +22,10 @@ export default function useMessage(): UseMessage {
 
 type UseMessage = { 
     message: string;  
-    style: { border?: string };
+    style: Style;
     messageTimeout: (style: MessageStyle, message: string) => void;
 }
+
+export type Style = { border?: string }
 
 type MessageStyle = 'error' | 'ok' | 'warning' | '';

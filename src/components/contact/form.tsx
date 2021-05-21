@@ -1,5 +1,4 @@
-import React from 'react';
-import './Form.css';
+import formStyles from './form.module.css';
 
 const Form = ({ 
     handleSubmit, 
@@ -9,11 +8,12 @@ const Form = ({
     handleEmailChange, 
     lang, 
     style 
-}) => {
+}: Props): JSX.Element => {
     return (
-        <div className="Form">
+        <div className={formStyles.Form}>
+            <h2>{lang === 'fi-FI' ? 'Ota yhteyttä' : 'Contact me'}</h2>
             <form onSubmit={handleSubmit}>
-                <div id='input-field'>
+                <div>
                     <input 
                         type='email'
                         id='email'
@@ -23,19 +23,31 @@ const Form = ({
                         onChange={e => handleEmailChange(e)}
                         style={style}
                     />
-                    <button id='submit-button' type="submit">send!</button>
+                    <button type="submit">
+                        {lang === 'fi-FI' ? 'Lähetä!' : 'Send!'}
+                    </button>
                 </div>
                 <textarea
                     type="text"
                     id='content'
                     value={content}
                     name="Content"
-                    placeholder={lang === 'fi' ? 'mitä kuuluu?' : 'what\'s on your mind?'}
+                    placeholder={lang === 'fi-FI' ? 'mitä kuuluu?' : 'what\'s on your mind?'}
                     onChange={e => handleContentChange(e)}
                 />
             </form>
         </div>
     );
 };
+
+type Props = {
+    handleSubmit: (e: any) => Promise<void>;
+    content: string;
+    handleContentChange: (e: any) => void;
+    email: string;
+    handleEmailChange: (e: any) => void;
+    lang: string;
+    style: { border?: string }
+}
 
 export default Form;

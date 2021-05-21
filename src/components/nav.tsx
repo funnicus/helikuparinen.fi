@@ -24,7 +24,6 @@ const Nav = (): JSX.Element => {
                     <li><Link href="/">Heli Kuparinen</Link></li>
                     <li><Link href="/about">{locale === 'fi-FI' ? 'Tietoa minusta' : 'About me' }</Link></li>
                     <li><Link href="/paintings">{locale === 'fi-FI' ? 'Teokset' : 'Paintings' }</Link></li>
-                    <li><Link href="/contact">{locale === 'fi-FI' ? 'Ota yhteyttä' : 'Contact me' }</Link></li>
                 </ul>
                 <ul id='Right'>
                     <li><Link href={pathname} locale={nextLocale}>{text}</Link></li>

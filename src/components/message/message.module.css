@@ -1,0 +1,12 @@
+.Message {
+    width: fit-content;
+    padding: 15px;
+    border-radius: 1.2em;
+    margin: auto;
+    font-size: 1.2em;
+
+    position: absolute;
+    top: 500;
+    right: 40%;
+    z-index: 100;
+}

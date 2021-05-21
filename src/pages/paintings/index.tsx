@@ -1,11 +1,11 @@
-import React from 'react';
+import paintingsStyles from './paintings.module.css';
 
-const paintings = () => {
+const Paintings = () => {
     return (
-        <div>
+        <div className={paintingsStyles.Paintings} >
             
         </div>
     );
 };
 
-export default paintings;
+export default Paintings;

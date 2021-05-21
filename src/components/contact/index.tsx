@@ -2,8 +2,10 @@ import { FC, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import Form from '@components/form';
-import Message from './Message';
+import Form from './form';
+import Message from '@components/message';
+
+import useMessage from '@hooks/useMessage';
 //import emailService from '../services/email'
 //import { Helmet } from 'react-helmet'
 //import './Contact.css';
@@ -11,39 +13,20 @@ import Message from './Message';
 const Contact: FC = () => {
     const [content, setContent] = useState('');
     const [email, setEmail] = useState('');
-    const [style, setStyle] = useState({});
-    const [notification, setNotification] = useState('Viesti lähetetty!');
-    const [notificationStyle, setNotificationStyle] = useState({});
 
-    const emailRegex = /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/;
+    const { locale } = useRouter();
+    const { message, style, messageTimeout } = useMessage();
 
     const handleContentChange = e => setContent(e.target.value);
 
-    function createMessageTimeout(messageCSS, mFi, mEn) {
-        setNotification(lang === 'fi' ? mFi : mEn );
-        setNotificationStyle(messageCSS);
-        setTimeout(() => {
-            setNotification('');
-            setNotificationStyle({});
-        }, 5000);
-    }
-
-    const handleEmailChange = e => {
-        if(!e.target.value){
-            setStyle({});
-        }
-        else if(emailRegex.test(e.target.value)){
-            setStyle({ border: '1px solid green'});
-        }
-        else{
-            setStyle({ border: '1px solid red'});
-        }
-        return setEmail(e.target.value);
-    };
+    const handleEmailChange = e => setEmail(e.target.value);
 
     const handleSubmit = async e => {
         e.preventDefault();
-        if(emailRegex.test(email) === true){
+        messageTimeout( 'ok', 'Onnistui!');
+        setEmail('');
+        setContent('');
+        /*if(emailRegex.test(email) === true){
             try {
                 const emailObj = {
                     email: email,
@@ -62,29 +45,29 @@ const Contact: FC = () => {
         }
         else{
             createMessageTimeout({ backgroundColor: '#ff3333', display: 'block' }, 'Sähköpostiosoite ei kelpaa...', 'Email not valid...');
-        }
+        }*/
     };
 
     return (
-        <div className="Contact">
-            <Helmet >
+        <>
+            <Head>
                 <title>Contact me</title>
                 <meta 
                     name='description' 
                     content='You can contact me with the form provided. I try to reply as fast as I can :)' 
                 />
-            </Helmet>
-            <Message message={notification} style={notificationStyle} />
+            </Head>
+            <Message message={message} style={style} />
             <Form
                 handleSubmit={handleSubmit}
                 content={content}
                 handleContentChange={handleContentChange}
                 email={email}
                 handleEmailChange={handleEmailChange}
-                lang={lang}
+                lang={locale}
                 style={style}
             />
-        </div>
+        </>
     );
 };
 
