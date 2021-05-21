@@ -6,8 +6,7 @@ const Form = ({
     handleContentChange, 
     email, 
     handleEmailChange, 
-    lang, 
-    style 
+    lang,
 }: Props): JSX.Element => {
     return (
         <div className={formStyles.Form}>
@@ -21,7 +20,6 @@ const Form = ({
                         name='Email'
                         placeholder='your@email.com'
                         onChange={e => handleEmailChange(e)}
-                        style={style}
                     />
                     <button type="submit">
                         {lang === 'fi-FI' ? 'Lähetä!' : 'Send!'}
@@ -47,7 +45,6 @@ type Props = {
     email: string;
     handleEmailChange: (e: any) => void;
     lang: string;
-    style: { border?: string }
 }
 
 export default Form;

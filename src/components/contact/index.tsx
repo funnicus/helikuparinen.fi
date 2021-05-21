@@ -6,9 +6,7 @@ import Form from './form';
 import Message from '@components/message';
 
 import useMessage from '@hooks/useMessage';
-//import emailService from '../services/email'
-//import { Helmet } from 'react-helmet'
-//import './Contact.css';
+import mail from '@services/mail';
 
 const Contact: FC = () => {
     const [content, setContent] = useState('');
@@ -17,35 +15,53 @@ const Contact: FC = () => {
     const { locale } = useRouter();
     const { message, style, messageTimeout } = useMessage();
 
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     const handleContentChange = e => setContent(e.target.value);
 
     const handleEmailChange = e => setEmail(e.target.value);
 
     const handleSubmit = async e => {
         e.preventDefault();
-        messageTimeout( 'ok', 'Onnistui!');
-        setEmail('');
-        setContent('');
-        /*if(emailRegex.test(email) === true){
-            try {
-                const emailObj = {
-                    email: email,
-                    message: content
-                };
-                await emailService.mail(emailObj);
-                createMessageTimeout({ backgroundColor: '#99ff66', display: 'block' }, 'Viesti lähetetty! Vastaan mahdollisimman pian...', 'Mail send! I will respond as soon as possible...');
-                setStyle({});
-                setEmail('');
-                setContent('');
-            }
-            catch(error){
-                console.log(error);    
-                createMessageTimeout({ backgroundColor: '#ff3333', display: 'block' }, error, error);  
-            }
+
+        if(!re.test(email)){
+            messageTimeout(
+                'error', 
+                (locale === 'fi-FI' ? 
+                    'Sähköposti osoite ei kelpaa!' : 
+                    'Email not valid!'
+                )
+            );
         }
-        else{
-            createMessageTimeout({ backgroundColor: '#ff3333', display: 'block' }, 'Sähköpostiosoite ei kelpaa...', 'Email not valid...');
-        }*/
+
+        try {
+            const mailObj = {
+                email: email,
+                message: content
+            };
+  
+            await mail(mailObj);
+            messageTimeout(
+                'ok', 
+                (locale === 'fi-FI' ? 
+                    'Viesti lähetetty! Vastaan mahdollisimman pian...' : 
+                    'Mail send! I will respond as soon as possible...'
+                )
+            );
+            setEmail('');
+            setContent('');
+        }
+        catch(error){
+            const message = (error as Error).message;
+            console.error();
+            messageTimeout(
+                'error', 
+                (locale === 'fi-FI' ? 
+                    message : 
+                    message
+                )
+            );
+        }
     };
 
     return (
@@ -65,7 +81,6 @@ const Contact: FC = () => {
                 email={email}
                 handleEmailChange={handleEmailChange}
                 lang={locale}
-                style={style}
             />
         </>
     );

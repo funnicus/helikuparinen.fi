@@ -1,3 +1,22 @@
 .Footer {
     background: #f6f7f8;
 }
+
+.social {
+    font-size: 2em;
+    justify-content: space-around;
+    padding: 0 0 30px;
+}
+
+.social > a {
+    margin: 0 50px 0;
+}
+
+.social .fa {
+    color: blue;
+}
+
+.social .in {
+    color: #9d38b1;
+}
+

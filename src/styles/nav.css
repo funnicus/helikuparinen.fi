@@ -1,7 +1,7 @@
 .Navbar {
     display: flex;
     justify-content: space-between;
-    background: #f7f7f7;
+    background: #fff;
     width: 100%;
     color: white;
   }
@@ -123,7 +123,6 @@
   @media only screen and (min-width: 770px) {
     .Navbar {
       display: flex;
-      position: fixed;
       top: 0;
       z-index: 1;
     }
