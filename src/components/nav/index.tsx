@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
-import useWindowDimensions from '../hooks/useWindowDimensions';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const Nav = (): JSX.Element => {
 

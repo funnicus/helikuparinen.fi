@@ -20,9 +20,6 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
         };
         
         const transporter = nodemailer.createTransport(transport);
-        
-        console.log(transport);
-        console.log(transporter);
 
         transporter.verify((error, success) => {
             if (error) {

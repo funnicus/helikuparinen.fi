@@ -15,9 +15,14 @@ Inside:
 SPACE_ID=... # contentful space id token and...
 ACCESS_TOKEN=... # access token and...
 PREVIEW_ACCESS_TOKEN=... # preview token (not necessary for dev)
+
+# + email info for nodemailer form
+EMAILUSER=user@email.com
+EMAILPASS=super_secretPaSsword666
+TO=recipient@email.com
 ```
 
-Ask those from me (if for some reason I would need to give these out) or use your own contenful tokens and id's.
+Ask those from me (if for some reason I would need to give these out) or use your own contenful tokens and id's and email infos.
 
 ### Scripts
 

@@ -23,3 +23,65 @@
 #about-me-nav ul li a:hover {
     color: black;
 }
+
+/*=========================================*/
+.Curriculum {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: auto;
+}
+
+.Curriculum ul {
+    list-style: none;
+}
+
+.Curriculum h4 {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.Curriculum h2 {
+    margin: auto;
+    margin-bottom: 40px;
+    padding: 10px;
+}
+
+.CurriculumRow {
+    display: flex;
+    margin-top: 10px;
+}
+
+.Desc {
+    color: #242424;
+    width: 78%;
+}
+
+.Year {
+    width: 22%;
+}
+
+.trust-pub {
+    text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+    .Curriculum {
+        width: 90%;
+    }
+    .CurriculumRow {
+        flex-direction: column;
+    }
+}
+@media only screen and (min-width: 900px) {
+    .Curriculum {
+        width: 60%;
+    }
+    .CurriculumRow {
+        flex-direction: row;
+    }
+    .Desc {
+        margin-left: 10px;
+    }
+}

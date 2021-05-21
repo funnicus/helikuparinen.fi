@@ -1,11 +1,36 @@
 import * as contentful from 'contentful';
 
+import { ContentType } from '@type/contentful';
+
 //import fs from 'fs';
 
 export const client = contentful.createClient({
     space: process.env.SPACE_ID,
     accessToken: process.env.ACCESS_TOKEN,
 });
+
+export const getSingleContent = async <T>(locale: string, type: ContentType): Promise<T> => {
+    const response = await client.getEntries({
+        content_type: type,
+        include: 6,
+        locale,
+    });
+
+    return (response?.items as contentful.Entry<T>[])[0].fields;
+};
+
+export const getContent = async <T>(locale: string, type: ContentType): Promise<contentful.Entry<T>[]> => {
+    const response = await client.getEntries({
+        content_type: type,
+        include: 6,
+        locale,
+    });
+
+    return (response?.items as contentful.Entry<T>[]);
+};
+
+/*
+
 
 export const getBio = async(locale: string): Promise<{
     title: string;
@@ -42,12 +67,13 @@ export const getGallery = async (locale: string): Promise<void> => {
     //fs.writeFileSync('data.json', JSON.stringify(response.items[0]));
 };
 
-export type Biography = contentful.Entry<{
-        title: string;
-        bio: string;
-}>
+export const getCurriculum = async (locale: string): Promise<void> => {
+    const response = await client.getEntries({
+        content_type: 'gallery',
+        locale,
+    });
 
-export type Statement = contentful.Entry<{
-        title: string;
-        statement: string;
-}>
+    console.log(response.items[0]);
+
+    //fs.writeFileSync('data.json', JSON.stringify(response.items[0]));
+};*/

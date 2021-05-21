@@ -2,8 +2,10 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 
-import { getStatement, getBio } from '@services/contentful';
-import { AboutProps } from '@type/contentful';
+import Curriculum from '@components/curriculum';
+
+import { getSingleContent, getContent } from '@services/contentful';
+import { AboutProps, Curriculum as CV } from '@type/contentful';
 import useWindowDimensions from '@hooks/useWindowDimensions';
 
 import aboutStyles from './about.module.css';
@@ -49,7 +51,7 @@ const About = (props: AboutProps): JSX.Element => {
                 </section>
                 <hr></hr>
                 <section id='curriculum'>
-                    {/*lang === 'fi' ? cvTranslation.cvFi() : cvTranslation.cvEn()*/}
+                    <Curriculum curriculum={props.curriculum} />
                 </section>
                 <hr></hr>
                 <section id='statement'>
@@ -65,8 +67,9 @@ const About = (props: AboutProps): JSX.Element => {
 export const getStaticProps: GetStaticProps = async context => {
     return {
         props: {
-            bio: await getBio(context.locale),
-            statement: await getStatement(context.locale)
+            bio: await getSingleContent<{ title: string; bio: string; }>(context.locale, 'biography'),
+            curriculum: await getContent<CV>(context.locale, 'curriculum'),
+            statement: await getSingleContent<{ title: string; statement: string; }>(context.locale, 'statement')
         }
     };
 };
