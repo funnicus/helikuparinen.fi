@@ -4,6 +4,8 @@ Next version (pun intended) website for the painter and my mom, **Heli Kuparinen
 
 As the last paragraph suggests, this site is created using **Next.js**, for better SEO than the old [CRApp](https://github.com/funnicus/helikuparinenhomepage) (it's time to stop, no offense to CRA though)! Easier content managment is achieved trough contentful!
 
+As of now, this site is deployed on subdomain [http://beta.helikuparinen.fi](http://beta.helikuparinen.fi)! The site is still very much work in progress, but it will be ready, eventually...
+
 ## Developing this site 🚀
 
 You will need node.js (v14.*) and npm (v6.*) installed.
