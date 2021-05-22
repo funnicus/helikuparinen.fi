@@ -1,19 +1,33 @@
+import { useState } from 'react';
+
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 
+import ImageOverlay from '@components/imageOverlay';
 import { getContent } from '@services/contentful';
 import { PaintingsProps, Gallery } from '@type/contentful';
+
+import useWindowDimensions from '@hooks/useWindowDimensions';
 
 import paintingsStyles from './paintings.module.css';
 
 const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
+
+    const [ imageFile, setImageFile ] = useState(null);
+    const [ text, setText ] = useState('');
+    const [ visible, setVisible ] = useState(false);
+
+    const { width } = useWindowDimensions();
+    const wdth = width;
+
     return (
         <div className={paintingsStyles.Paintings} >
             <Head >
                 <title>Gallery</title>
                 <meta name='description' content='Here you can see all my paintnigs and the collections associated with them.' />
             </Head>
+            {imageFile ? <ImageOverlay visible={visible} setVisible={setVisible} file={imageFile} text={text}/> : null}
             {gallery[0].fields.collections.map(collection => {
                 return(
                     <section key={collection.sys.id}>
@@ -21,13 +35,19 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                         <div>
                             {collection.fields.paintings.map(painting => {
                                 const file = painting.fields.file;
+                                const { width, height } = file.details.image;
                                 return(
                                     <div 
                                         className={paintingsStyles.painting}
                                         style={{ 
-                                            width: file.details.image.width/4,
-                                            height: file.details.image.height/4
+                                            width: (wdth < width ? wdth/2 : width/3),
+                                            height: height/3
                                         }} 
+                                        onClick={() => {
+                                            setText(painting.fields.title + ' ' + painting.fields.description);
+                                            setImageFile(file);
+                                            setVisible(!visible);
+                                        }}
                                         key={painting.sys.id}
                                     >
                                         <Image

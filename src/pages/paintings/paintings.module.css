@@ -1,27 +1,23 @@
 .Paintings {
     max-width: 1200px;
     margin: auto;
-
-    animation: fadeInPaintings 0.3s ease-in both;
 }
 
 .Paintings > section {
     text-align: center;
+    animation: fadeInPaintings 0.3s ease-in both;
 }
 
 .Paintings > section > div {
     display: grid;
     gap: 1rem;
 
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    grid-auto-rows: 340px;
+    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    grid-auto-rows: 440px;
 }
 
 .painting {
     position: relative;
-
-    width: 16em;
-    height: 16em;
 
     margin: auto;
 
