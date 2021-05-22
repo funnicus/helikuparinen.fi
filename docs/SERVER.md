@@ -51,7 +51,7 @@ That defines a server block with a proxy! The most important part is the **locat
 
 ### SSL Certifications
 
-We use Let's Encrypt and [Certbot](https://certbot.eff.org/) for our SSL Certifications. More about that [here](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)!
+We use Let's Encrypt and [Certbot](https://certbot.eff.org/) for our SSL Certifications. Adding a cert to the desired domain is quite straightforward. It is done with the following command: `sudo certbot --nginx -d example.com`. More about that [here](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)!
 
 ### PM2 logrotate
 

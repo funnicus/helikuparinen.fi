@@ -55,4 +55,4 @@ sudo systemctl restart nginx
 ```
 ## More comprehensive documentation
 
-I have done some [documenting](./docs/TOC.md) for this project, mainly for my future self, but any other curious fella can take a look🙂
+I have done some [documenting](./docs/TOC.md) for this project, mainly for my future self and Heli, but any other curious fella can take a look🙂
