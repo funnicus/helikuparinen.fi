@@ -25,7 +25,7 @@
 	color: #000000;
 }
 
-.Header h1, .Header h3 {
+.Header h1, .Header h2 {
     animation: fadeInHeader 2s ease-in both;
 }
 

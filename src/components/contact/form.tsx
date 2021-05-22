@@ -21,7 +21,7 @@ const Form = ({
                         placeholder='your@email.com'
                         onChange={e => handleEmailChange(e)}
                     />
-                    <button type="submit">
+                    <button type="submit" aria-label='send email'>
                         {lang === 'fi-FI' ? 'Lähetä!' : 'Send!'}
                     </button>
                 </div>

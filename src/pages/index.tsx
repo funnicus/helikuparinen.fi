@@ -15,7 +15,7 @@ export default function Home(): JSX.Element {
             </Head>
             <hgroup>
                 <h1>Heli Kuparinen</h1>
-                <h3>{locale === 'fi-FI' ? 'Taidemaalari' : 'A Painter'}</h3>
+                <h2>{locale === 'fi-FI' ? 'Taidemaalari' : 'A Painter'}</h2>
             </hgroup>
         </header>
     );

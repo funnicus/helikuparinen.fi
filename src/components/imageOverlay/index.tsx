@@ -15,7 +15,9 @@ const ImageOverlay = ({ visible, setVisible, file, text }: ImageProps): JSX.Elem
                     src={`https:${file.url}`} 
                     alt={file.fileName} 
                     width={file.details.image.width/1.5} 
-                    height={file.details.image.height/1.5}/>
+                    height={file.details.image.height/1.5}
+                    quality='60'
+                />
                 <p>{text}</p>
             </div>
         </div>

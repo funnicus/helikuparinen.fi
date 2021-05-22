@@ -1,4 +1,4 @@
-import * as contenful from 'contentful';
+import { Entry } from 'contentful';
 
 export type AboutProps = {
     bio: Biography;
@@ -7,7 +7,7 @@ export type AboutProps = {
 }
 
 export type PaintingsProps = {
-    gallery: contenful.Entry<Gallery>[];
+    gallery: Entry<Gallery>[];
 }
 
 export type ContentType = 'biography' | 'gallery' | 'statement' | 'curriculum';
@@ -20,7 +20,7 @@ export type Biography = {
 
 export type Curriculum = {
     title: string;
-    section: Array<contenful.Entry<CurriculumSection>>;
+    section: Array<Entry<CurriculumSection>>;
 }
 
 //turha?
@@ -31,7 +31,7 @@ export type Statement = {
 
 type CurriculumSection = {
     title: string;
-    entries: Array<contenful.Entry<CurriculumEntry>>;     
+    entries: Array<Entry<CurriculumEntry>>;     
 }
 
 type CurriculumEntry = {
@@ -41,10 +41,10 @@ type CurriculumEntry = {
 
 export type Gallery = {
     gallery: string;
-    collections: Array<contenful.Entry<Collection>>;
+    collections: Array<Entry<Collection>>;
 }
 
 type Collection = {
     name: string;
-    paintings: Array<contenful.Asset>;
+    paintings: Array<Asset>;
 }

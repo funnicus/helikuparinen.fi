@@ -54,6 +54,7 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                         <Image
                                             src={`https:${file.url}`}
                                             alt={painting.fields.title}
+                                            quality='30'
                                             layout='fill'
                                             objectFit='cover'
                                         />
