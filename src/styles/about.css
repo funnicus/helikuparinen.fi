@@ -30,6 +30,7 @@
     flex-direction: column;
     list-style: none;
     margin: auto;
+    padding: 0 0 10vh 0;
 }
 
 .Curriculum ul {
@@ -62,8 +63,9 @@
     width: 22%;
 }
 
-.trust-pub {
+.entry2 {
     text-align: center;
+    margin: auto;
 }
 
 @media only screen and (max-width: 900px) {

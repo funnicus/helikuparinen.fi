@@ -6,14 +6,12 @@
 
     font-size: 1.25em;
 
-    background: #f6f7f8;
-    box-shadow: 0 -0.2em .5em rgba(0,0,0,.1);
-
     animation: fadeInAbout 0.5s ease-in both;
 }
 
 .bio {
     display: flex;
+    height: 100vh;
 }
 
 .bio > article {
@@ -22,6 +20,10 @@
 
 .About > section > h2 {
     text-align: center;
+}
+
+.About > section {
+    padding: 10vh 0 10vh 0;
 }
 
 @media only screen and (max-width: 600px) {

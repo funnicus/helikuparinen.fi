@@ -13,8 +13,12 @@ const Curriculum = ({ curriculum } : { curriculum: contentful.Entry<CV>[] }): JS
                         {section.fields.entries.map(entry => {
                             return(
                                 <div className='CurriculumRow' key={entry.sys.id}>
-                                    <div className='Year'><strong>{entry.fields.year}</strong></div>
-                                    <div className='Desc'>{entry.fields.content}</div>
+                                    {
+                                        entry.fields.year ? 
+                                            <div className='Year'><strong>{entry.fields.year}</strong></div> : 
+                                            null
+                                    }
+                                    <div className={entry.fields.year ? 'Desc' : 'entry2'}>{entry.fields.content}</div>
                                 </div>
                             );
                         })}

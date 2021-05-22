@@ -36,7 +36,7 @@ type CurriculumSection = {
 
 type CurriculumEntry = {
     content: string;
-    year: string;
+    year?: string;
 }
 
 export type Gallery = {
