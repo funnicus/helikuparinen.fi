@@ -66,13 +66,6 @@ const Contact: FC = () => {
 
     return (
         <>
-            <Head>
-                <title>Contact me</title>
-                <meta 
-                    name='description' 
-                    content='You can contact me with the form provided. I try to reply as fast as I can :)' 
-                />
-            </Head>
             <Message message={message} style={style} />
             <Form
                 handleSubmit={handleSubmit}
