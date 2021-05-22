@@ -44,6 +44,7 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                             height: height/3
                                         }} 
                                         onClick={() => {
+                                            setImageFile(null);
                                             setText(painting.fields.title + ' ' + painting.fields.description);
                                             setImageFile(file);
                                             setVisible(!visible);
