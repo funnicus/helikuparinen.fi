@@ -26,7 +26,7 @@ TO=recipient@email.com
 
 Ask those from me (if for some reason I would need to give these out) or use your own contenful tokens and id's and email infos.
 
-### Scripts
+### Scripts and other commands
 
 ```bash
 # start dev server
@@ -45,4 +45,14 @@ pm2 start npm --name "beta-dev" -- run dev
 # production
 npm run build
 pm2 start npm --name "beta" -- start
+
+# nginx
+# test that you have cnfigured your nginx files correctly
+sudo nginx -t
+
+# restart nginx so that changes take effect
+sudo systemctl restart nginx
 ```
+## More comprehensive documentation
+
+I have done some [documenting](./docs/TOC.md) for this project, mainly for my future self, but any other curious fella can take a look🙂
