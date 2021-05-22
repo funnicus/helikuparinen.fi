@@ -26,6 +26,8 @@ TO=recipient@email.com
 
 Ask those from me (if for some reason I would need to give these out) or use your own contenful tokens and id's and email infos.
 
+More about Next apps [here](./NEXT.md)!
+
 ### Scripts and other commands
 
 ```bash

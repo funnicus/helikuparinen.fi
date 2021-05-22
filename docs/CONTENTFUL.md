@@ -8,16 +8,16 @@ We use contentful for content managment in this website. All the content in **/a
 
 Our contentful space contains the following models:
 
-1. Biography	Bio text for about me page
-2. Collection	A collection of paintings.
-3. Curriculum	Curriculum vitae.
-4. cv entry	    One entry for the cv.
-5. cv entry 2	One entry for the cv without a year.
-6. cv section	Represent one section in the CV
-7. Gallery	    Gallery, where all the paintigs will be shown
-8. statement	Artist's statement.
+1. Biography	- *Bio text for about me page*
+2. Collection	- *A collection of paintings.*
+3. Curriculum	- *Curriculum vitae.*
+4. cv entry	    - *One entry for the cv.*
+5. cv entry 2	- *One entry for the cv without a year.*
+6. cv section	- *Represent one section in the CV.*
+7. Gallery	    - *Gallery, where all the paintigs will be shown*
+8. statement	- *Artist's statement.*
 
-These models should be used in hiararchically like this:
+These models should be used in hierarchically like this:
 
 - Biography
 - Curriculum - curriculum contains sections
@@ -28,12 +28,14 @@ These models should be used in hiararchically like this:
 - Gallery - gallery contains collections
     - Collection
 
+There should only ever exist one entry of the top level content types so don't add more of those! 
+
 ## Adding content to this site
 
-If you want to add something to this site. You must have access to the sites contenful space. First you need an account for that. Head over to https://www.contentful.com/sign-up/ and create an account (you can do it easily with google). Then request me to add you as an collaborator to the sites space.
+If you want to add something to this site. You must have access to the sites contentful space. First you need an account for that. Head over to https://www.contentful.com/sign-up/ and create an account (you can do it easily with google). Then request me to add you as an collaborator to the sites space.
 
 ### Adding content
 
 ![image](./images/contentful.PNG)
 
-In the image above, you can see *Content* tab of our contentful space. Here you can add all the content you want. On the left, you can see all the content types you can modify. Click on something you want to change, for example gallery and the entries found should show only gallery content types. You can then click the entry you want to modify and that should be easy from there!
+In the image above, you can see the *Content* tab of our contentful space. Here you can add all the content you want. On the left, you can see all the content types you can modify. Click on something you want to change, for example gallery and the entries found should show only gallery content types. You can then click the entry you want to modify and that should be easy from there!
