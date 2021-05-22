@@ -55,7 +55,7 @@ We use Let's Encrypt and [Certbot](https://certbot.eff.org/) for our SSL Certifi
 
 ### PM2 logrotate
 
-It is important to rember to do logrotate with PM2, so your small server doesn't fill up with log files (I learnt this the hard way). I have already configured this to be automatic, but it's good do remember either way. More about it [here](https://www.digitalocean.com/community/tutorials/how-to-manage-logfiles-with-logrotate-on-ubuntu-16-04).
+It is important to remember to do logrotate with PM2, so your small server doesn't fill up with log files (I learned this the hard way). I have already configured this to be automatic, but it's good do remember either way. More about it [here](https://www.digitalocean.com/community/tutorials/how-to-manage-logfiles-with-logrotate-on-ubuntu-16-04).
 
 Phew! In a nutshell indeed...
 
