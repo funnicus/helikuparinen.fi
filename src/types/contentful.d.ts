@@ -6,6 +6,10 @@ export type AboutProps = {
     statement: Statement;
 }
 
+export type PaintingsProps = {
+    gallery: contenful.Entry<Gallery>[];
+}
+
 export type ContentType = 'biography' | 'gallery' | 'statement' | 'curriculum';
 
 //turha?
@@ -33,4 +37,14 @@ type CurriculumSection = {
 type CurriculumEntry = {
     content: string;
     year: string;
+}
+
+export type Gallery = {
+    gallery: string;
+    collections: Array<contenful.Entry<Collection>>;
+}
+
+type Collection = {
+    name: string;
+    paintings: Array<contenful.Asset>;
 }

@@ -14,7 +14,7 @@ All my apps reside in the folder `~/` and are running with PM2. Nginx is configu
 
 ### Symlinks
 
-The sites-available directory contains all the **server block** configurations (virtual host in apache terms). Server blocks/virtual hosts allow us to host multiple websites on a single webserver (which is obviously useful). This allows me to host my site at beta.helikuparinen.fi for testing out it in the wild and helikuparinen.fi for the actual production ready site.
+The sites-available directory contains all the **server block** configurations (Virtual host in apache terms). Server blocks/Virtual hosts allow us to host multiple websites on a single webserver (which is obviously useful). This allows me to host my site at beta.helikuparinen.fi for testing out it in the wild and helikuparinen.fi for the actual production ready site.
 
 The sites-enabled directory contains [symbolic links](https://www.howtogeek.com/287014/how-to-create-and-use-symbolic-links-aka-symlinks-on-linux/) (symlinks/soft links) to files in sites-available folder. This allows you to selectively disable and enable server blocks as you wish.
 
@@ -22,7 +22,7 @@ To give you an example, I have a file called helikuparinen.fi, which contains al
 
 ### Server blocks
 
-Whats inside thos files in sites-available anyway? The file helikuparinen.fi contains something like this: 
+Whats inside those files in sites-available anyway? The file helikuparinen.fi contains something like this: 
 
 ```nginx
 server {
@@ -49,7 +49,7 @@ server {
 
 That defines a server block with a proxy! The most important part is the **location** block. It tells Nginx to proxy requests on hosts defined in server_name at / to our app in http://localhost:3000! I have a another similar block defined in that file which proxies requests on beta.helikuparinen.fi to http://localhost:8080!
 
-### SSl Certifications
+### SSL Certifications
 
 We use Let's Encrypt and [Certbot](https://certbot.eff.org/) for our SSL Certifications. More about that [here](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)!
 

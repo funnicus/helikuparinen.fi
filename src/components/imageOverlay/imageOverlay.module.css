@@ -1,0 +1,47 @@
+.Overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.904);
+}
+
+.image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    text-align: center;
+}
+
+#shownImage {
+    height: 70vh;
+    width: auto;
+}
+
+.Painting p {
+    color: white;
+    font-size: 1.5em;
+}
+
+#visible {
+    display: block;
+}
+
+#notVisible {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #shownImage {
+        width: 100%;
+        height: auto;
+    }
+}
