@@ -25,8 +25,9 @@
 	color: #000000;
 }
 
-.Header h1, .Header h2 {
+.Header h1 {
     animation: fadeInHeader 2s ease-in both;
+	animation-delay: 2s;
 }
 
 @keyframes fadeInHeader {

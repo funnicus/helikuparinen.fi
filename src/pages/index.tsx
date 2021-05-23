@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
+import Font from '@components/font';
+
 import indexStyles from './index.module.css';
 
 export default function Home(): JSX.Element {
@@ -14,8 +16,8 @@ export default function Home(): JSX.Element {
                 <meta name='description' content='Hello! My name is Heli Kuparinen, welcome to my site!' />
             </Head>
             <hgroup>
-                <h1>Heli Kuparinen</h1>
-                <h2>{locale === 'fi-FI' ? 'Taidemaalari' : 'A Painter'}</h2>
+                <Font />
+                <h1>{locale === 'fi-FI' ? 'Taidemaalari' : 'A Painter'}</h1>
             </hgroup>
         </header>
     );

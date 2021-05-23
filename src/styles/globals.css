@@ -21,3 +21,36 @@ a {
 * {
   box-sizing: border-box;
 }
+
+#signature1 {
+  stroke-dasharray: 1274;
+  stroke-dashoffset: 1274;
+  animation: sign 9s ease forwards;
+}
+
+#signature2 {
+  stroke-dasharray: 407;
+  stroke-dashoffset: 407;
+  animation: sign 5s ease forwards;
+  animation-delay: 1s;
+}
+
+#signature3 {
+  stroke-dasharray: 1234;
+  stroke-dashoffset: 1234;
+  animation: sign 9s ease forwards;
+  animation-delay: 2s;
+}
+
+#signature1,
+#signature2,
+#signature3 {
+  stroke: black;
+  stroke-width: 5px;
+}
+
+@keyframes sign {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
