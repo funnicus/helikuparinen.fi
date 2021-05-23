@@ -46,7 +46,7 @@ a {
 #signature2,
 #signature3 {
   stroke: black;
-  stroke-width: 5px;
+  stroke-width: 6px;
 }
 
 @keyframes sign {

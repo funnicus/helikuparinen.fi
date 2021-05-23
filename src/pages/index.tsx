@@ -13,12 +13,13 @@ export default function Home(): JSX.Element {
         <header className={indexStyles.Header}>
             <Head >
                 <title>Heli Kuparinen</title>
-                <meta name='description' content='Hello! My name is Heli Kuparinen, welcome to my site!' />
+                <meta name='description' content='Heli Kuparinen, a Visual Artist/Painter.
+                 Heli paints mostly with oil paints and likes to portray people on her works.' />
             </Head>
-            <hgroup>
+            <header>
                 <Font />
                 <h1>{locale === 'fi-FI' ? 'Taidemaalari' : 'A Painter'}</h1>
-            </hgroup>
+            </header>
         </header>
     );
 }

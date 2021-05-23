@@ -29,7 +29,6 @@
   }
   
   #Right button {
-    background: #f7f7f7;
     border: none;
   }
   
@@ -42,7 +41,6 @@
     display: none;
     margin-left: auto;
     border-radius: 5px;
-    background: #f7f7f7;
     border: none;
     font-size: 2em;
   }

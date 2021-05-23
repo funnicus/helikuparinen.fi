@@ -68,3 +68,4 @@ If you want know more about creating a server like this on Digital Ocean, follow
 - Nginx install: https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
 - Let's Encrypt for Nginx: https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04
 - Node.js app to production: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04
+

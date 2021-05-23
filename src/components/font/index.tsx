@@ -6,7 +6,9 @@ const Font = (): JSX.Element => {
             <svg 
                 className={fontStyles.Font}
                 xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 1007.773 157.049">
+                viewBox="0 0 1007.773 157.049"
+            >
+                <title>Heli Kuparinen</title>
                 <g fill="none" stroke="#000" strokeWidth=".265">
                     <path
                         id="signature1"

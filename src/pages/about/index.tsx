@@ -21,7 +21,7 @@ const About = (props: AboutProps): JSX.Element => {
         <div>
             <Head >
                 <title>About me</title>
-                <meta name='description' content='I am a Helsinki-based artist who mainly works with oilpaints. 
+                <meta name='description' content='Heli Kuparinen is a Helsinki-based artist who mainly works with oilpaints. 
                 Currently, I am particulary interested in portraying people in
                 my works. On the background, I have a solid understanding 
                 of the living model, aqcuired from my studies, as well as an academic degree
