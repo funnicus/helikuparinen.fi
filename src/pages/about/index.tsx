@@ -75,7 +75,7 @@ const About = (props: AboutProps): JSX.Element => {
                 <hr></hr>
                 <section id='statement'>
                     <h2>{props.statement.title}</h2>
-                    <article><p>{statement}</p></article>
+                    <article>{statement}</article>
                 </section>
                 <hr></hr>
             </div>

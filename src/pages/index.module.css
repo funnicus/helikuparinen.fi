@@ -2,8 +2,6 @@
     text-align: center;
 	font-family: sans-serif;
 	height: 100vh;
-	background: white url("../../public/last.jpg") no-repeat;
-	background-size: cover;
 }
 
 .Header header {
@@ -11,8 +9,6 @@
 
     padding: 35vh 0 0;
 
-   	background: rgba(184, 175, 175, 0.3);
-	
 	color: #000000;
 }
 

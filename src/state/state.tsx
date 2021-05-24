@@ -12,7 +12,6 @@ import { State, Action } from '@type/state';
   
 const initialState: State = {
     theme: {
-        background: '#ffffff',
         color: '#000000'
     }
 };

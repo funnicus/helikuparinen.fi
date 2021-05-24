@@ -1,8 +1,8 @@
 .Navbar {
   display: flex;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0);
+  justify-content: space-between; 
   width: 100%;
+  font-size: 1.2em;
 }
 
 .Navbar ul {

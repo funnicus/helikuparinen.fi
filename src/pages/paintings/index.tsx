@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
@@ -9,6 +9,7 @@ import { getContent } from '@services/contentful';
 import { PaintingsProps, Gallery } from '@type/contentful';
 
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import { useStateValue, setTheme } from '@state/index';
 
 import paintingsStyles from './paintings.module.css';
 
@@ -19,6 +20,13 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
     const [ visible, setVisible ] = useState(false);
 
     const { width } = useWindowDimensions();
+    const [, dispatch ] = useStateValue();
+
+    useEffect(() => {
+        dispatch(setTheme({ background: '#fff', color: '#242424' }));
+    }, []);
+
+    //??
     const wdth = width;
 
     return (

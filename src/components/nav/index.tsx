@@ -12,7 +12,7 @@ const Nav = (): JSX.Element => {
 
     const [style, setStyle] = useState(true);
 
-    const [{ theme }, dispatch] = useStateValue();
+    const [{ theme }] = useStateValue();
     const { locale, pathname } = useRouter();
     const { width } = useWindowDimensions();
 
@@ -26,9 +26,9 @@ const Nav = (): JSX.Element => {
             <button className={navStyles.dropdownBtn} onClick={toggleMenu}>{!style ? <FaTimes /> : <FaBars />}</button>
             <nav className={navStyles.Navbar} style={style && width < 770 ? { display: 'none' } : { display: 'flex' }}>
                 <ul className={navStyles.Left} style={{ color: theme.color }}>
-                    <li onClick={() => dispatch(setTheme({ background: '#fff', color: '#242424' }))}><Link href="/">Heli Kuparinen</Link></li>
+                    <li><Link href="/">Heli Kuparinen</Link></li>
                     <li><Link href="/about">{locale === 'fi-FI' ? 'Tietoa minusta' : 'About me' }</Link></li>
-                    <li onClick={() => dispatch(setTheme({ background: '#fff', color: '#242424' }))}><Link href="/paintings">{locale === 'fi-FI' ? 'Teokset' : 'Paintings' }</Link></li>
+                    <li><Link href="/paintings">{locale === 'fi-FI' ? 'Teokset' : 'Paintings' }</Link></li>
                 </ul>
                 <ul className={navStyles.Right}>
                     <li><Link href={pathname} locale={nextLocale}>{text}</Link></li>
