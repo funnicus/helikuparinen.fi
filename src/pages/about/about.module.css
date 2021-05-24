@@ -18,6 +18,11 @@
     width: 50%;
 }
 
+.About > section > article > h2 {
+    font-family: 'Alata', sans-serif;
+}
+
+
 .About > section > h2 {
     text-align: center;
 }

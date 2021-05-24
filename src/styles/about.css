@@ -17,11 +17,10 @@
 
 #about-me-nav ul li a {
     transition: color, 0.3s;
-    color: gray;
 }
 
 #about-me-nav ul li a:hover {
-    color: black;
+    color: #757575;
 }
 
 /*=========================================*/

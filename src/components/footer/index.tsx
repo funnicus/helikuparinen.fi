@@ -1,6 +1,6 @@
 import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
-import Contact from './contact';
+import Contact from '../contact';
 
 import footerStyles from './footer.module.css';
 

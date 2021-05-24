@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -6,16 +8,33 @@ import Curriculum from '@components/curriculum';
 
 import { getSingleContent, getContent } from '@services/contentful';
 import { AboutProps, Curriculum as CV } from '@type/contentful';
+
+import { useStateValue, setTheme } from '@state/index';
 import useWindowDimensions from '@hooks/useWindowDimensions';
+import useScrollPosition, { IScrollProps } from '@hooks/useScrollPosition';
 
 import aboutStyles from './about.module.css';
 
 const About = (props: AboutProps): JSX.Element => {
 
+    const [{ theme }, dispatch ] = useStateValue();
+
     //making seperate paragraphs from each newline in statement
     const statement = props.statement.statement.split('\n').map((s, i) => <p key={i}>{s}</p>);
 
+    const setBackground = (props: IScrollProps) => {
+        if(props.currPos.y < 1229) dispatch(setTheme({ background: '#aebfbe', color: '#000' }));
+        else if(props.currPos.y < 4266) dispatch(setTheme({ background: '#E0F2F1', color: '#000' }));
+        else dispatch(setTheme({ background: '#fff', color: '#000' }));
+    };
+
     const { width } = useWindowDimensions();
+    useScrollPosition(setBackground, null, null, true);
+
+    //setting darker theme when navigating to page
+    useEffect(() => {
+        dispatch(setTheme({ background: '#aebfbe', color: '#000' }));
+    }, []);
 
     return (
         <div>
@@ -34,7 +53,7 @@ const About = (props: AboutProps): JSX.Element => {
                     <li><a href='#statement'>Statement</a></li>
                 </ul>
             </nav> : null}
-            <div className={aboutStyles.About}>
+            <div style={{ color: theme.color }} className={aboutStyles.About}>
                 <section id='about' className={aboutStyles.bio}>
                     <article>
                         <h2>{props.bio.title}</h2>
