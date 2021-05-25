@@ -50,14 +50,18 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                         <h2>{collection.fields.name}</h2>
                         <div>
                             {collection.fields.paintings.map(painting => {
-                                const file = painting.fields.file;
-                                const { width, height } = file.details.image;
+                                const file = painting.fields.file as File;
+                                const details = file.details.image;
+                                //some of the wide images are too wide
+                                //even when divided by 3
+                                const divider = details.width/3 > width ?
+                                    4 : 3;
                                 return(
                                     <div 
                                         className={paintingsStyles.painting}
                                         style={{ 
-                                            width: width/3,
-                                            height: height/3
+                                            width: details.width/divider,
+                                            height: details.height/divider
                                         }} 
                                         onClick={() => openImage(painting.fields.title + ' ' + painting.fields.description, file)}
                                         key={painting.sys.id}
@@ -66,8 +70,8 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                             src={`https:${file.url}`}
                                             alt={painting.fields.title}
                                             quality='30'
-                                            width={width}
-                                            height={height}
+                                            width={details.width}
+                                            height={details.height}
                                         />
                                     </div>
                                 );
