@@ -1,14 +1,15 @@
 import Image from 'next/image';
-import { SetStateAction } from 'react';
+
+import { File } from '@type/contentful';
 
 import overlayStyles from './imageOverlay.module.css';
 
-const ImageOverlay = ({ visible, setVisible, file, text }: ImageProps): JSX.Element => {
+const ImageOverlay = ({ visible, closeImage, file, text }: ImageProps): JSX.Element => {
     return (
         <div 
             style={visible ? { display: 'block'} : { display: 'none' }} 
             className={overlayStyles.Overlay}
-            onClick={() => setVisible(prev => !prev)}
+            onClick={closeImage}
         >
             <div>
                 <Image 
@@ -26,22 +27,9 @@ const ImageOverlay = ({ visible, setVisible, file, text }: ImageProps): JSX.Elem
 
 type ImageProps = {
     visible: boolean;
-    setVisible: (value: SetStateAction<boolean>) => void;
+    closeImage: () => void;
     file: File;
     text: string;
-}
-
-type File = {
-    url: string;
-    details: {
-        size: number;
-        image?: {
-            width: number;
-            height: number;
-        };
-    };
-    fileName: string;
-    contentType: string;
 }
 
 export default ImageOverlay;

@@ -48,3 +48,16 @@ type Collection = {
     name: string;
     paintings: Array<Asset>;
 }
+
+export type File = {
+    url: string;
+    details: {
+        size: number;
+        image?: {
+            width: number;
+            height: number;
+        };
+    };
+    fileName: string;
+    contentType: string;
+}

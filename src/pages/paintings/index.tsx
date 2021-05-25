@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 import ImageOverlay from '@components/imageOverlay';
 import { getContent } from '@services/contentful';
-import { PaintingsProps, Gallery } from '@type/contentful';
+import { PaintingsProps, Gallery, File } from '@type/contentful';
 
 import useWindowDimensions from '@hooks/useWindowDimensions';
 import { useStateValue, setTheme } from '@state/index';
@@ -26,8 +26,16 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
         dispatch(setTheme({ background: '#fff', color: '#242424' }));
     }, []);
 
-    //??
-    const wdth = width;
+    const openImage = (text: string, file: File) => {
+        setText(text);
+        setImageFile(file);
+        setVisible(!visible);
+    };
+
+    const closeImeage = () => {
+        setImageFile(null);
+        setVisible(!visible);
+    };
 
     return (
         <div className={paintingsStyles.Paintings} >
@@ -35,7 +43,7 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                 <title>Gallery</title>
                 <meta name='description' content='Here you can see all my paintnigs and the collections associated with them.' />
             </Head>
-            {imageFile ? <ImageOverlay visible={visible} setVisible={setVisible} file={imageFile} text={text}/> : null}
+            {imageFile ? <ImageOverlay visible={visible} closeImage={closeImeage} file={imageFile} text={text}/> : null}
             {gallery[0].fields.collections.map(collection => {
                 return(
                     <section key={collection.sys.id}>
@@ -48,23 +56,18 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                     <div 
                                         className={paintingsStyles.painting}
                                         style={{ 
-                                            width: (wdth < width ? wdth/2 : width/3),
+                                            width: width/3,
                                             height: height/3
                                         }} 
-                                        onClick={() => {
-                                            setImageFile(null);
-                                            setText(painting.fields.title + ' ' + painting.fields.description);
-                                            setImageFile(file);
-                                            setVisible(!visible);
-                                        }}
+                                        onClick={() => openImage(painting.fields.title + ' ' + painting.fields.description, file)}
                                         key={painting.sys.id}
                                     >
                                         <Image
                                             src={`https:${file.url}`}
                                             alt={painting.fields.title}
                                             quality='30'
-                                            layout='fill'
-                                            objectFit='cover'
+                                            width={width}
+                                            height={height}
                                         />
                                     </div>
                                 );
