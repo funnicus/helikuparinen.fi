@@ -29,6 +29,14 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           PREVIEW_ACCESS_TOKEN: ${{ secrets.PREVIEW_ACCESS_TOKEN }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          USERNAME: ${{ secrets.SSH_USERNAME }}
+          PORT: ${{ secrets.SSH_PORT }}
+          KEY: ${{ secrets.SSH_KEY }}
+          script: ls
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
