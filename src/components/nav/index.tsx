@@ -29,6 +29,7 @@ const Nav = (): JSX.Element => {
                     <li><Link href="/">Heli Kuparinen</Link></li>
                     <li><Link href="/about">{locale === 'fi-FI' ? 'Tietoa minusta' : 'About me' }</Link></li>
                     <li><Link href="/paintings">{locale === 'fi-FI' ? 'Teokset' : 'Paintings' }</Link></li>
+                    <li><Link href="/blog">{locale === 'fi-FI' ? 'Blogi' : 'Blog' }</Link></li>
                 </ul>
                 <ul className={navStyles.Right}>
                     <li><Link href={pathname} locale={nextLocale}>{text}</Link></li>
