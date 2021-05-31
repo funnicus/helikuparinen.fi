@@ -1,4 +1,4 @@
-import { Entry } from 'contentful';
+import { Entry, Asset } from 'contentful';
 
 export type AboutProps = {
     bio: Biography;
@@ -10,12 +10,12 @@ export type PaintingsProps = {
     gallery: Entry<Gallery>[];
 }
 
-export type ContentType = 'biography' | 'gallery' | 'statement' | 'curriculum';
+export type ContentType = 'biography' | 'gallery' | 'statement' | 'curriculum' | 'post';
 
 //turha?
 export type Biography = {
-        title: string;
-        bio: string;
+    title: string;
+    bio: string;
 }
 
 export type Curriculum = {
@@ -25,8 +25,8 @@ export type Curriculum = {
 
 //turha?
 export type Statement = {
-        title: string;
-        statement: string;
+    title: string;
+    statement: string;
 }
 
 type CurriculumSection = {
@@ -47,6 +47,14 @@ export type Gallery = {
 type Collection = {
     name: string;
     paintings: Array<Asset>;
+}
+
+export type Post = {
+    title: string;
+    slug: string;
+    cover: Asset;
+    date: string;
+    excerpt: string;
 }
 
 export type File = {

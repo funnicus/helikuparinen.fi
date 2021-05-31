@@ -1,7 +1,21 @@
+import { useEffect } from 'react';
+import { GetStaticPaths } from 'next';
+
+import { getContent } from '@services/contentful';
+import { Post as Blog } from '@type/contentful';
+import { useStateValue, setTheme } from '@state/index';
+
 const Post = (): JSX.Element => {
+
+    const [, dispatch ] = useStateValue();
+
+    useEffect(() => {
+        dispatch(setTheme({ background: '#fff', color: '#242424' }));
+    }, []);
+
     return (
         <div>
-            
+            Hei :D
         </div>
     );
 };
@@ -20,10 +34,12 @@ export async function getStaticProps({ params, preview = false }) {
     };
 }
   
-export async function getStaticPaths() {
-    //const allPosts = await getAllPostsWithSlug();
+export const getStaticPaths: GetStaticPaths = async () => {
+    const allPosts = await getContent<Blog>('en-US', 'post');
     return {
-        //paths: allPosts?.map(({ slug }) => `/posts/${slug}`) ?? [],
+        paths: allPosts?.map(post => ({
+            params: { slug: post.fields.slug },
+        })) ?? [],
         fallback: true,
     };
-}
+};
