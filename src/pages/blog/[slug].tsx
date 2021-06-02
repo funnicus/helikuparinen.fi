@@ -1,38 +1,61 @@
-import { useEffect } from 'react';
-import { GetStaticPaths } from 'next';
+import { useEffect, FC } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { Entry } from 'contentful';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
-import { getContent } from '@services/contentful';
+import { getContent, getEntriesByField } from '@services/contentful';
 import { Post as Blog } from '@type/contentful';
 import { useStateValue, setTheme } from '@state/index';
+import { getDateFI, getDateUS } from '@helpers/parseDates';
+import { options } from './options';
+import slugStyles from './slug.module.css';
 
-const Post = (): JSX.Element => {
+const Post: FC<Props> = ({ post }) => {
 
     const [, dispatch ] = useStateValue();
+
+    const { locale } = useRouter();
 
     useEffect(() => {
         dispatch(setTheme({ background: '#fff', color: '#242424' }));
     }, []);
 
+    console.log(post);
+
+    if(!post) return <span>Loading...</span>;
+
     return (
-        <div>
-            Hei :D
+        <div className={slugStyles.Slug}>
+            <img
+                src={`https:${post.fields.cover.fields.file.url}`}
+            />
+            <h3>{locale === 'fi-FI' ? getDateFI(post.fields.date) : getDateUS(post.fields.date)}</h3>
+            {documentToReactComponents(post.fields.content, options)}
         </div>
     );
 };
 
 export default Post;
 
-export async function getStaticProps({ params, preview = false }) {
-    //const data = await getPostAndMorePosts(params.slug, preview);
+type Props = {
+    preview: boolean;
+    post: Entry<Blog>;
+    morePosts: Entry<Blog>[];
+}
+
+export const getStaticProps: GetStaticProps = async ({ params, preview = false, locale }) => {
+    const data = await getEntriesByField<Blog>({ field: 'slug', value: (Array.isArray(params.slug) ? params.slug[0] : params.slug), contentType: 'post', locale });
   
+    const post = data[0];
+
     return {
         props: {
             preview,
-            //post: data?.post ?? null,
-            //morePosts: data?.morePosts ?? null,
+            post: post ?? null,
         },
     };
-}
+};
   
 export const getStaticPaths: GetStaticPaths = async () => {
     const allPosts = await getContent<Blog>('en-US', 'post');
@@ -43,3 +66,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
         fallback: true,
     };
 };
+
+/*
+
+            <h1>{post.fields.title}</h1>
+            {post.fields.content.content?.map((paragraph, i) => {
+                return (
+                    <section key={i}>{paragraph.content?.map(content => {
+                        return (
+                            content.nodeType === 'text' ? <h2>{content.value}</h2> :
+                                <p>{content.value}</p>
+                        );
+                    })}</section>
+                );
+            })}
+*/

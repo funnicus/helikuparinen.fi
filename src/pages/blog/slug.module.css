@@ -1,0 +1,12 @@
+.Slug {
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: auto;
+    padding: 10px 10px 10vh;
+}
+
+.Slug img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}

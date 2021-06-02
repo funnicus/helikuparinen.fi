@@ -1,4 +1,4 @@
-import { Entry, Asset } from 'contentful';
+import { Entry, Asset, RichTextContent } from 'contentful';
 
 export type AboutProps = {
     bio: Biography;
@@ -55,6 +55,7 @@ export type Post = {
     cover: Asset;
     date: string;
     excerpt: string;
+    content: any;
 }
 
 export type File = {
@@ -69,3 +70,10 @@ export type File = {
     fileName: string;
     contentType: string;
 }
+
+export type GetEntriesOpts = {
+    field: string;
+    value: string;
+    contentType: string;
+    locale?: string;
+};

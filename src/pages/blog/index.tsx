@@ -8,6 +8,7 @@ import { Entry } from 'contentful';
 import { useStateValue, setTheme } from '@state/index';
 import { getContent } from '@services/contentful';
 import { Post } from '@type/contentful';
+import { getDateFI, getDateUS } from '@helpers/parseDates';
 
 import blogStyles from './index.module.css';
 
@@ -29,13 +30,16 @@ const Blog = ({ posts }: Props): JSX.Element => {
             <div className={blogStyles.posts}>
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
                 {posts ? posts.map(post => {
+                    console.log(post.fields.date.split('-'));
+                    console.log(post.fields.date.split('-').join(' '));
+                    console.log(post.fields.date.split('-').join(' ').split('T'));
                     return(
                         <div className={blogStyles.post} key={post.sys.id}>
                             <img
                                 src={`https:${post.fields.cover.fields.file.url}`}
                             />
                             <div>
-                                <p>{post.fields.date.split('-').join(' ').split('T')}</p>
+                                <p>{locale === 'fi-FI' ? getDateFI(post.fields.date) : getDateUS(post.fields.date)}</p>
                                 <h2>{post.fields.title}</h2>
                                 <p>{post.fields.excerpt}</p>
                                 <Link href={`/blog/${post.fields.slug}`}>{locale === 'fi-FI' ? 'Lue Lisää' : 'Read More'}</Link>
@@ -47,10 +51,6 @@ const Blog = ({ posts }: Props): JSX.Element => {
         </div>
     );
 };
-
-function getDate(date: string) {
-    const arr = date.split('-').join(' ').split('T');
-}
 
 export const getStaticProps: GetStaticProps = async context => {
     return {
