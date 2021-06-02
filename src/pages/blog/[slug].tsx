@@ -9,7 +9,7 @@ import { getContent, getEntriesByField } from '@services/contentful';
 import { Post as Blog } from '@type/contentful';
 import { useStateValue, setTheme } from '@state/index';
 import { getDateFI, getDateUS } from '@helpers/parseDates';
-import { options } from './options';
+import { options } from '@helpers/options';
 import slugStyles from './slug.module.css';
 
 const Post: FC<Props> = ({ post }) => {
