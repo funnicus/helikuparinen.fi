@@ -30,9 +30,6 @@ const Blog = ({ posts }: Props): JSX.Element => {
             <div className={blogStyles.posts}>
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
                 {posts ? posts.map(post => {
-                    console.log(post.fields.date.split('-'));
-                    console.log(post.fields.date.split('-').join(' '));
-                    console.log(post.fields.date.split('-').join(' ').split('T'));
                     return(
                         <div className={blogStyles.post} key={post.sys.id}>
                             <img
