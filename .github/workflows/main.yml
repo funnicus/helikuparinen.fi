@@ -28,7 +28,6 @@ jobs:
           SPACE_ID: ${{ secrets.SPACE_ID }}
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           PREVIEW_ACCESS_TOKEN: ${{ secrets.PREVIEW_ACCESS_TOKEN }}
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
       - name: Deploy
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         uses: appleboy/ssh-action@master
@@ -40,6 +39,7 @@ jobs:
           script: |
             cd helikuparinen.fi/
             git pull
+            npm install
             npm run build
             pm2 restart beta
       - uses: actions/checkout@v2

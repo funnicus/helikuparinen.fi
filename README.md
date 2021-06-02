@@ -49,7 +49,7 @@ npm run build
 pm2 start npm --name "beta" -- start
 
 # nginx
-# test that you have cnfigured your nginx files correctly
+# test that you have configured your nginx files correctly
 sudo nginx -t
 
 # restart nginx so that changes take effect

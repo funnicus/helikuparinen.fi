@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 
-import { useStateValue, setTheme } from '@state/index';
+import { useStateValue } from '@state/index';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 import navStyles from './nav.module.css';
@@ -13,7 +13,8 @@ const Nav = (): JSX.Element => {
     const [style, setStyle] = useState(true);
 
     const [{ theme }] = useStateValue();
-    const { locale, pathname } = useRouter();
+    //query erittäin tärkeä eikä tästä löydy tietoa mistään!
+    const { locale, pathname, query } = useRouter();
     const { width } = useWindowDimensions();
 
     const toggleMenu = () => setStyle(!style);
@@ -29,9 +30,10 @@ const Nav = (): JSX.Element => {
                     <li><Link href="/">Heli Kuparinen</Link></li>
                     <li><Link href="/about">{locale === 'fi-FI' ? 'Tietoa minusta' : 'About me' }</Link></li>
                     <li><Link href="/paintings">{locale === 'fi-FI' ? 'Teokset' : 'Paintings' }</Link></li>
+                    <li><Link href="/blog">{locale === 'fi-FI' ? 'Blogi' : 'Blog' }</Link></li>
                 </ul>
                 <ul className={navStyles.Right}>
-                    <li><Link href={pathname} locale={nextLocale}>{text}</Link></li>
+                    <li><Link href={{ pathname, query }} locale={nextLocale}>{text}</Link></li>
                 </ul>
             </nav>
         </div>

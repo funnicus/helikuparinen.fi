@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
 
+:root {
+  --grey: #f6f7f8;
+}
+
 html,
 body {
   scroll-behavior: smooth;
