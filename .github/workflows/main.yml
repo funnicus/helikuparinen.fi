@@ -39,6 +39,7 @@ jobs:
           script: |
             cd helikuparinen.fi/
             git pull
+            npm install
             npm run build
             pm2 restart beta
       - uses: actions/checkout@v2
