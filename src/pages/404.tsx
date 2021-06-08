@@ -1,4 +1,4 @@
-import {  FC } from 'react';
+import { FC } from 'react';
 import CSS from 'csstype';
 
 const NotFound: FC = () => {
