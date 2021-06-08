@@ -25,7 +25,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
         <div className={blogStyles.Blog}>
             <Head >
                 <title>About me</title>
-                <meta name='description' content='Blogs about Heli&#39;s art adn day to day life.' />
+                <meta name='description' content='Blogs about Heli&#39;s art and day to day life.' />
             </Head>
             <div className={blogStyles.posts}>
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
@@ -54,6 +54,7 @@ export const getStaticProps: GetStaticProps = async context => {
         props: {
             posts: await getContent<Post>(context.locale, 'post')
         },
+        revalidate: 30
     };
 };
 

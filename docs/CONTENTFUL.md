@@ -16,6 +16,7 @@ Our contentful space contains the following models:
 6. cv section	- *Represent one section in the CV.*
 7. Gallery	    - *Gallery, where all the paintigs will be shown*
 8. statement	- *Artist's statement.*
+9. Post         - *Defines model for a blog post.*
 
 These models should be used in hierarchically like this:
 
@@ -27,6 +28,7 @@ These models should be used in hierarchically like this:
 - Statement
 - Gallery - gallery contains collections
     - Collection
+- Post
 
 There should only ever exist one entry of the top level content types so don't add more of those! 
 
