@@ -1,3 +1,8 @@
+/**
+ * Helper functions for Google Analytics
+ * https://hoangtrinhj.com/using-google-analytics-with-next-js
+ */
+
 export const GA_TRACKING_ID = 'G-S6P4JWRS8Y'; // This is your GA Tracking ID
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
