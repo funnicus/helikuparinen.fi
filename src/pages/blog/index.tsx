@@ -32,11 +32,11 @@ const Blog = ({ posts }: Props): JSX.Element => {
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
                 {posts ? posts.map(post => {
                     return(
-                        <div className={blogStyles.post} key={post.sys.id}>
+                        <div className={blogStyles.post} key={post.sys.id} onClick={() => router.push(`/blog/${post.fields.slug}`)}>
                             <img
                                 src={`https:${post.fields.cover.fields.file.url}`}
                             />
-                            <div onClick={() => router.push(`/blog/${post.fields.slug}`)}>
+                            <div>
                                 <p>{locale === 'fi-FI' ? getDateFI(post.fields.date) : getDateUS(post.fields.date)}</p>
                                 <h2>{post.fields.title}</h2>
                                 <p>{post.fields.excerpt}</p>
