@@ -35,6 +35,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
                         <div className={blogStyles.post} key={post.sys.id} onClick={() => router.push(`/blog/${post.fields.slug}`)}>
                             <img
                                 src={`https:${post.fields.cover.fields.file.url}`}
+                                alt={post.fields.cover.fields.title}
                             />
                             <div>
                                 <p>{locale === 'fi-FI' ? getDateFI(post.fields.date) : getDateUS(post.fields.date)}</p>

@@ -35,6 +35,7 @@ const Post: FC<Props> = ({ post }) => {
             </Head>
             <img
                 src={`https:${post.fields.cover.fields.file.url}`}
+                alt={post.fields.cover.fields.title}
             />
             <h3><FaCalendarAlt style={{ color: 'green' }} /> {locale === 'fi-FI' ? getDateFI(post.fields.date) : getDateUS(post.fields.date)}</h3>
             {documentToReactComponents(post.fields.content, options)}
