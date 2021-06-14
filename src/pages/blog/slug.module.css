@@ -3,10 +3,22 @@
     min-height: 100vh;
     margin: auto;
     padding: 10px 10px 10vh;
+    animation: fadeInDrop 0.3s ease-in both;
 }
 
 .Slug img {
     width: 100%;
     height: 400px;
     object-fit: cover;
+}
+
+@keyframes fadeInDrop {
+	from {
+		opacity: 0;
+		transform: translate3d(0, -0.2%, 0);
+    }
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
 }
