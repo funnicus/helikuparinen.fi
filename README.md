@@ -48,7 +48,7 @@ pm2 start npm --name "prod" -- start
 
 # beta in ~/beta.helikuparinen.fi
 npm run build
-pm2 start npm --name "beta" -- start
+pm2 start npm --name "beta" -- start -- --port 8080
 
 # nginx
 # test that you have configured your nginx files correctly
