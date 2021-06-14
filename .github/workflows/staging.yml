@@ -11,7 +11,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  main-deploy_pipeline:    
+  main-deploy_pipeline_beta:    
     runs-on: ubuntu-18.04    
     steps:      
       - uses: actions/checkout@v2
@@ -42,3 +42,9 @@ jobs:
             npm install
             npm run build
             pm2 restart beta
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598 # let's use a hash version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
