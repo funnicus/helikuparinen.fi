@@ -14,7 +14,8 @@ import blogStyles from './index.module.css';
 
 const Blog = ({ posts }: Props): JSX.Element => {
 
-    const { locale } = useRouter();
+    const router = useRouter();
+    const { locale } = router;
     const [, dispatch ] = useStateValue();
 
     useEffect(() => {
@@ -35,7 +36,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
                             <img
                                 src={`https:${post.fields.cover.fields.file.url}`}
                             />
-                            <div>
+                            <div onClick={() => router.push(`/blog/${post.fields.slug}`)}>
                                 <p>{locale === 'fi-FI' ? getDateFI(post.fields.date) : getDateUS(post.fields.date)}</p>
                                 <h2>{post.fields.title}</h2>
                                 <p>{post.fields.excerpt}</p>
