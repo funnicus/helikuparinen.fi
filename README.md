@@ -4,7 +4,7 @@ Next version (pun intended) website for the painter and my mom, **Heli Kuparinen
 
 As the last paragraph suggests, this site is created using **Next.js**, for better SEO than the old [CRApp](https://github.com/funnicus/helikuparinenhomepage) (it's time to stop, no offense to CRA though)! Easier content managment is achieved trough contentful!
 
-As of now, this site is deployed on subdomain [https://beta.helikuparinen.fi](https://beta.helikuparinen.fi)! The site is production ready, but some code refactoring would be nice atleast before that, maybe better styling too...
+The site is deployed at [https://helikuparinen.fi](https://helikuparinen.fi)!
 
 ## Developing this site 🚀
 
@@ -41,10 +41,12 @@ npm start
 npm run lint -- --fix
 
 # for server
-# development
-pm2 start npm --name "beta-dev" -- run dev
 
-# production
+# production ~/helikuparinen.fi
+npm run build
+pm2 start npm --name "prod" -- start
+
+# beta in ~/beta.helikuparinen.fi
 npm run build
 pm2 start npm --name "beta" -- start
 
