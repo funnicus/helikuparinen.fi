@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import { FC, ReactNode } from 'react';
-import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types';
 
 export const Bold: FC<OptionsProps> = ({ children }) => <strong>{children}</strong>;
 
@@ -13,11 +13,17 @@ Text.displayName = 'PARAGRPH';
 
 export const options = {
     renderMark: {
-        [MARKS.BOLD]: (text: ReactNode): JSX.Element => <Bold>{text}</Bold>
+        [MARKS.BOLD]: (text: ReactNode): JSX.Element => <Bold>{text}</Bold>,
     },
     renderNode: {
         [BLOCKS.PARAGRAPH]: (_node, children: ReactNode): JSX.Element => <Text>{children}</Text>,
         [BLOCKS.HEADING_1]: (_node, children: ReactNode): JSX.Element => <H1>{children}</H1>,
+        [INLINES.HYPERLINK]: ({ data }, children: ReactNode): JSX.Element => (
+            <a
+                href={data.uri}
+                style={{ color: 'blue' }}
+            >{children}</a>
+        )
     }
 };
 
