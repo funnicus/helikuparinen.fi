@@ -31,11 +31,11 @@ More about Next apps [here](./NEXT.md)!
 ### Scripts and other commands
 
 ```bash
-# start dev server
+# start dev server localhost:3000
 npm run dev
 # build production ready code
 npm run build
-# start production server
+# start production server localhost:3000
 npm start
 # lint the code with eslint (and fix automatically fixable errors)
 npm run lint -- --fix
@@ -57,6 +57,15 @@ sudo nginx -t
 # restart nginx so that changes take effect
 sudo systemctl restart nginx
 ```
+
+### Docker
+
+Run the following command with env variables to build an image:
+
+```sh
+docker build --build-arg SPACE_ID=<here> --build-arg ACCESS_TOKEN=<here> --build-arg PREVIEW_ACCESS_TOKEN=<here> --build-arg EMAILUSER=<here> --build-arg EMAILPASS=<here> --build-arg TO=<here> -t helikuparinen.fi .
+```
+
 ## More comprehensive documentation
 
 I have done some [documenting](./docs/TOC.md) for this project, mainly for my future self and Heli, but any other curious fella can take a look🙂
