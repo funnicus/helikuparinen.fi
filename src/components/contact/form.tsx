@@ -1,3 +1,4 @@
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import formStyles from './form.module.css';
 
 const Form = ({ 
@@ -6,6 +7,8 @@ const Form = ({
     handleContentChange, 
     email, 
     handleEmailChange, 
+    antispam,
+    setAntispam,
     lang,
 }: Props): JSX.Element => {
     return (
@@ -25,6 +28,14 @@ const Form = ({
                         {lang === 'fi-FI' ? 'Lähetä!' : 'Send!'}
                     </button>
                 </div>
+                <input 
+                    className={formStyles.antispam} 
+                    type="text" 
+                    name="url" 
+                    placeholder="leave empty!!" 
+                    value={antispam}
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => setAntispam(e.target.value)}
+                />
                 <textarea
                     itemType='text'
                     id='content'
@@ -44,6 +55,8 @@ type Props = {
     handleContentChange: (e: any) => void;
     email: string;
     handleEmailChange: (e: any) => void;
+    antispam: string;
+    setAntispam: Dispatch<SetStateAction<string>>;
     lang: string;
 }
 

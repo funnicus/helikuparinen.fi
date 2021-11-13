@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import validateEmail from '@helpers/validateEmail';
+import sanitize from '@helpers/sanitize';
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
     if(req.method === 'POST'){
@@ -27,9 +28,11 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
             }
         });
         
-        const email = req.body.email;
-        const message = req.body.message;
-        const content = `${email} \n ${message} `;
+        const { email, message, antispam } = req.body;
+        const content = sanitize(`${email} \n ${message} `);
+
+        // Detecting spam
+        if(antispam) res.status(400).json({ status: 'spam', err: 'Please refresh the page and try again!' });
 
         if(!validateEmail(email)) res.status(400).json({ status: 'fail' });
 
