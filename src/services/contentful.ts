@@ -1,6 +1,6 @@
 import { Entry, createClient } from 'contentful';
 
-import { ContentType, GetEntriesOpts, Post } from '@type/contentful';
+import { ContentType, GetEntriesOpts } from '@type/contentful';
 
 export const client = createClient({
     space: process.env.SPACE_ID,
@@ -29,9 +29,7 @@ export const getContent = async <T>(locale: string, type: ContentType): Promise<
 
 /**
  * Returns all entries that have a field with the given value.
- * @param opts
- * @author kumpmati https://github.com/kumpmati
- * @returns
+ * @author kumpmati <https://github.com/kumpmati>
  */
 export const getEntriesByField = async <T>({
     field,

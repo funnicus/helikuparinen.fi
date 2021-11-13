@@ -1,27 +1,23 @@
 .Header {
-    text-align: center;
+  text-align: center;
 	font-family: sans-serif;
 	height: 100vh;
 }
 
 .Header header {
 	height: 100%;
-
-    padding: 35vh 0 0;
-
+  padding: 35vh 0 0;
 	color: #000000;
 }
 
 .Header h1 {
-    font-size: 4em;
-
-    margin: auto;
-
+  font-size: 4em;
+  margin: auto;
 	color: #000000;
 }
 
 .Header h1 {
-    animation: fadeInHeader 2s ease-in both;
+  animation: fadeInHeader 2s ease-in both;
 	animation-delay: 2s;
 }
 

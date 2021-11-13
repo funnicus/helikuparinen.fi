@@ -1,5 +1,4 @@
 import { FC, useState, ChangeEvent } from 'react';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import Form from './form';
@@ -10,12 +9,11 @@ import mail from '@services/mail';
 
 const Contact: FC = () => {
     const [content, setContent] = useState('');
+    const [ antispam, setAntispam ] = useState('');
     const [email, setEmail] = useState('');
 
     const { locale } = useRouter();
     const { message, style, messageTimeout } = useMessage();
-
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const handleContentChange = (e: ChangeEvent<HTMLInputElement>) => setContent(e.target.value);
 
@@ -24,20 +22,11 @@ const Contact: FC = () => {
     const handleSubmit = async (e: Event) => {
         e.preventDefault();
 
-        if(!re.test(email)){
-            messageTimeout(
-                'error', 
-                (locale === 'fi-FI' ? 
-                    'Sähköposti osoite ei kelpaa!' : 
-                    'Email not valid!'
-                )
-            );
-        }
-
         try {
             const mailObj = {
                 email: email,
-                message: content
+                message: content,
+                antispam
             };
   
             await mail(mailObj);
@@ -73,6 +62,8 @@ const Contact: FC = () => {
                 handleContentChange={handleContentChange}
                 email={email}
                 handleEmailChange={handleEmailChange}
+                antispam={antispam}
+                setAntispam={setAntispam}
                 lang={locale}
             />
         </>

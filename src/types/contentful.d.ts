@@ -1,4 +1,4 @@
-import { Entry, Asset, RichTextContent } from 'contentful';
+import { Entry, Asset } from 'contentful';
 
 export type AboutProps = {
     bio: Biography;
