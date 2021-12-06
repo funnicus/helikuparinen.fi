@@ -89,7 +89,8 @@ export const getStaticProps: GetStaticProps = async context => {
             bio: await getSingleContent<{ title: string; bio: string; }>(context.locale, 'biography'),
             curriculum: await getContent<CV>(context.locale, 'curriculum'),
             statement: await getSingleContent<{ title: string; statement: string; }>(context.locale, 'statement')
-        }
+        },
+        revalidate: 60
     };
 };
 
