@@ -1,13 +1,16 @@
 import { Entry, createClient } from 'contentful';
 
-import { ContentType, GetEntriesOpts } from '@type/contentful';
+import { ContentType, GetEntriesOpts } from '@/types/contentful';
 
 export const client = createClient({
     space: process.env.SPACE_ID,
     accessToken: process.env.ACCESS_TOKEN,
 });
 
-export const getSingleContent = async <T>(locale: string, type: ContentType): Promise<T> => {
+export const getSingleContent = async <T>(
+    locale: string,
+    type: ContentType
+): Promise<T> => {
     const response = await client.getEntries({
         content_type: type,
         include: 6,
@@ -17,14 +20,17 @@ export const getSingleContent = async <T>(locale: string, type: ContentType): Pr
     return (response?.items as Entry<T>[])[0].fields;
 };
 
-export const getContent = async <T>(locale: string, type: ContentType): Promise<Entry<T>[]> => {
+export const getContent = async <T>(
+    locale: string,
+    type: ContentType
+): Promise<Entry<T>[]> => {
     const response = await client.getEntries({
         content_type: type,
         include: 6,
         locale,
     });
 
-    return (response?.items as Entry<T>[]);
+    return response?.items as Entry<T>[];
 };
 
 /**
@@ -43,6 +49,6 @@ export const getEntriesByField = async <T>({
         include: 6,
         locale,
     });
-  
+
     return response?.items || null;
 };

@@ -1,0 +1,41 @@
+.banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgba(248, 248, 248, 0.904);
+
+    padding: 10px;
+}
+
+.wrapper {
+    width: fit-content;
+    margin: auto;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+
+    button {
+        border: none;
+        cursor: pointer;
+
+        font-size: 1.3rem;
+
+        border-radius: 5px;
+
+        &:hover {
+            filter: brightness(0.9);
+        }
+    }
+
+    .accept {
+        background: #49e049;
+    }
+
+    .deny {
+        background-color: yellow;
+        color: black;
+    }
+}

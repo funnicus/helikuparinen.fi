@@ -4,12 +4,10 @@
  * https://hoangtrinhj.com/using-google-analytics-with-next-js
  */
 
-export const GA_TRACKING_ID = 'G-S6P4JWRS8Y'; // This is your GA Tracking ID
-
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string): void => {
     if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
-        window.gtag('config', GA_TRACKING_ID, {
+        window.gtag('config', process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS, {
             page_path: url,
         });
     }

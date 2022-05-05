@@ -1,27 +1,30 @@
-import { 
-    FC, 
+import {
+    FC,
     Dispatch,
     Reducer,
     ReactElement,
-    createContext, 
-    useContext, 
-    useReducer 
+    createContext,
+    useContext,
+    useReducer,
 } from 'react';
 
-import { State, Action } from '@type/state';
-  
+import { State, Action } from '@/types/state';
+
 const initialState: State = {
     theme: {
-        color: '#000000'
-    }
+        color: '#000000',
+    },
 };
-  
+
 export const StateContext = createContext<[State, Dispatch<Action>]>([
     initialState,
-    () => initialState
+    () => initialState,
 ]);
-  
-export const StateProvider: FC<StateProviderProps> = ({ reducer, children }: StateProviderProps) => {
+
+export const StateProvider: FC<StateProviderProps> = ({
+    reducer,
+    children,
+}: StateProviderProps) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <StateContext.Provider value={[state, dispatch]}>

@@ -4,5 +4,6 @@
     "useTabs": false,
     "arrowParens": "always",
     "printWidth": 80,
-    "singleQuote": true
+    "singleQuote": true,
+    "singleAttributePerLine": false
 }

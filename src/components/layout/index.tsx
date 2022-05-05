@@ -1,14 +1,13 @@
 import { FC, ReactNode } from 'react';
 
-import { useStateValue } from '@state/index';
+import { useStateValue } from '@/state/index';
 
-import Nav from './nav';
-import Footer from './footer';
+import Nav from '../nav';
+import Footer from '../footer';
 
 import layoutStyles from './layout.module.css';
 
 const Layout: FC<Props> = ({ children }) => {
-
     const [{ theme }] = useStateValue();
 
     return (
@@ -21,7 +20,7 @@ const Layout: FC<Props> = ({ children }) => {
 };
 
 interface Props {
-  children: ReactNode;
+    children: ReactNode;
 }
 
 export default Layout;

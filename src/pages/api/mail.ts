@@ -1,21 +1,20 @@
 import nodemailer from 'nodemailer';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import validateEmail from '@helpers/validateEmail';
-import sanitize from '@helpers/sanitize';
+import validateEmail from '@/helpers/validateEmail';
+import sanitize from '@/helpers/sanitize';
 
 const handler = (req: NextApiRequest, res: NextApiResponse): void => {
-    if(req.method === 'POST'){
-
+    if (req.method === 'POST') {
         const transport = {
             host: 'smtpa.kolumbus.fi', // Don’t forget to replace with the SMTP host of your provider
             port: 587,
             auth: {
                 user: process.env.EMAILUSER,
-                pass: process.env.EMAILPASS
-            }
+                pass: process.env.EMAILPASS,
+            },
         };
-        
+
         const transporter = nodemailer.createTransport(transport);
 
         transporter.verify((error, success) => {
@@ -27,20 +26,24 @@ const handler = (req: NextApiRequest, res: NextApiResponse): void => {
                 console.log('Server is ready to take on messages');
             }
         });
-        
+
         const { email, message, antispam } = req.body;
         const content = sanitize(`${email} \n ${message} `);
 
         // Detecting spam
-        if(antispam) res.status(400).json({ status: 'spam', err: 'Please refresh the page and try again!' });
+        if (antispam)
+            res.status(400).json({
+                status: 'spam',
+                err: 'Please refresh the page and try again!',
+            });
 
-        if(!validateEmail(email)) res.status(400).json({ status: 'fail' });
+        if (!validateEmail(email)) res.status(400).json({ status: 'fail' });
 
         const mail = {
             from: email,
-            to: process.env.TO,  // Change to email address that you want to receive messages on
+            to: process.env.TO, // Change to email address that you want to receive messages on
             subject: 'Joku on ottanut sinuun yhteyttä kotisivujesi kautta!',
-            text: content
+            text: content,
         };
 
         transporter.sendMail(mail, (err) => {
