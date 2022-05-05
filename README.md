@@ -22,6 +22,7 @@ PREVIEW_ACCESS_TOKEN=... # preview token (not necessary for dev)
 EMAILUSER=user@email.com
 EMAILPASS=super_secretPaSsword666
 TO=recipient@email.com
+NEXT_PUBLIC_GOOGLE_ANALYTICS=G-SOMETHING
 ```
 
 Ask those from me (if for some reason I would need to give these out) or use your own contenful tokens and id's and email infos.
