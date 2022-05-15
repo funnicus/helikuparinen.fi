@@ -1,11 +1,10 @@
 import { FC } from 'react';
-import CSS from 'csstype';
+import { CSSProperties } from 'react';
 
 const NotFound: FC = () => {
-
-    const style: CSS.Properties = { 
-        height: '100vh', 
-        fontSize: '3em', 
+    const style: CSSProperties = {
+        height: '100vh',
+        fontSize: '3em',
         textAlign: 'center',
         padding: '15%',
     };

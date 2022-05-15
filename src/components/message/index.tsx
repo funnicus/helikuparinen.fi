@@ -1,4 +1,4 @@
-import { Style } from '@hooks/useMessage';
+import { Style } from '@/hooks/useMessage';
 
 import messageStyles from './message.module.css';
 
@@ -13,6 +13,6 @@ const Message = ({ message, style }: Props): JSX.Element => {
 type Props = {
     message: string;
     style: Style;
-}
+};
 
 export default Message;
