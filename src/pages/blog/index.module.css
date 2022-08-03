@@ -23,15 +23,9 @@
 
 .post:hover {
     cursor: pointer;
-    -webkit-box-shadow: 2px 0px 19px 4px rgba(0,0,0,0.2);
-    -moz-box-shadow: 2px 0px 19px 4px rgba(0,0,0,0.2);
-    box-shadow: 2px 0px 19px 4px rgba(0,0,0,0.2);
-}
-
-.post > img {
-    height: 100%;
-    width: 300px;
-    object-fit: cover;
+    -webkit-box-shadow: 2px 0px 19px 4px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 2px 0px 19px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0px 19px 4px rgba(0, 0, 0, 0.2);
 }
 
 .post > div {
@@ -42,25 +36,20 @@
     text-decoration: underline;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
     .post {
         height: 500px;
         flex-direction: column;
     }
-
-    .post > img {
-        width: 100%;
-        object-fit: cover;
-    }
 }
 
 @keyframes fadeInDrop {
-	from {
-		opacity: 0;
-		transform: translate3d(0, -0.2%, 0);
+    from {
+        opacity: 0;
+        transform: translate3d(0, -0.2%, 0);
     }
-	to {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-	}
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }

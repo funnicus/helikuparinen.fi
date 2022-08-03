@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
@@ -13,25 +13,38 @@ import { useStateValue, setTheme } from '@/state/index';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import useScrollPosition, { IScrollProps } from '@/hooks/useScrollPosition';
 
-import aboutStyles from './about.module.css';
+import aboutStyles from './about.module.scss';
 
-const About = (props: AboutProps): JSX.Element => {
+type Focus = 'about' | 'cv' | 'statement';
+
+const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
     const [{ theme }, dispatch] = useStateValue();
 
-    //making seperate paragraphs from each newline in statement
-    const statement = props.statement.statement
+    const [navFocus, setNavFocus] = useState<Focus>('about');
+
+    // making seperate paragraphs from each newline in statement
+    const statementMapped = statement.statement
         .split('\n')
         .map((s, i) => <p key={i}>{s}</p>);
 
-    const setBackground = (props: IScrollProps) => {
-        if (props.currPos.y < 1229)
+    const setBackground = ({ currPos }: IScrollProps) => {
+        if (currPos.y < 1000) {
             dispatch(setTheme({ background: '#aebfbe', color: '#000' }));
-        else if (props.currPos.y < 4266)
+            setNavFocus('about');
+        } else if (currPos.y < 4266) {
             dispatch(setTheme({ background: '#E0F2F1', color: '#000' }));
-        else dispatch(setTheme({ background: '#fff', color: '#000' }));
+            setNavFocus('cv');
+        } else {
+            dispatch(setTheme({ background: '#fff', color: '#000' }));
+            setNavFocus('statement');
+        }
     };
 
+    const isFocused = (target: Focus) =>
+        navFocus === target ? aboutStyles['focused-nav'] : null;
+
     const { width } = useWindowDimensions();
+
     useScrollPosition(setBackground, null, null, true);
 
     //setting darker theme when navigating to page
@@ -55,13 +68,13 @@ const About = (props: AboutProps): JSX.Element => {
             {width > 950 ? (
                 <nav id="about-me-nav">
                     <ul>
-                        <li>
+                        <li className={isFocused('about')}>
                             <a href="#about">About me</a>
                         </li>
-                        <li>
+                        <li className={isFocused('cv')}>
                             <a href="#curriculum">Curriculum</a>
                         </li>
-                        <li>
+                        <li className={isFocused('statement')}>
                             <a href="#statement">Statement</a>
                         </li>
                     </ul>
@@ -70,8 +83,8 @@ const About = (props: AboutProps): JSX.Element => {
             <div style={{ color: theme.color }} className={aboutStyles.About}>
                 <section id="about" className={aboutStyles.bio}>
                     <article>
-                        <h2>{props.bio.title}</h2>
-                        <p>{props.bio.bio}</p>
+                        <h2>{bio.title}</h2>
+                        <p>{bio.bio}</p>
                     </article>
                     <div>
                         <Image
@@ -84,12 +97,12 @@ const About = (props: AboutProps): JSX.Element => {
                 </section>
                 <hr></hr>
                 <section id="curriculum">
-                    <Curriculum curriculum={props.curriculum} />
+                    <Curriculum curriculum={curriculum} />
                 </section>
                 <hr></hr>
                 <section id="statement">
-                    <h2>{props.statement.title}</h2>
-                    <article>{statement}</article>
+                    <h2>{statement.title}</h2>
+                    <article>{statementMapped}</article>
                 </section>
                 <hr></hr>
             </div>

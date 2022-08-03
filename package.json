@@ -1,36 +1,35 @@
 {
-  "name": "helikuparinen.fi",
-  "version": "0.1.0",
-  "private": true,
-  "license": "MIT",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint ./ --ext js,jsx,ts,tsx"
-  },
-  "dependencies": {
-    "@contentful/rich-text-html-renderer": "^14.1.2",
-    "@contentful/rich-text-react-renderer": "^14.1.3",
-    "contentful": "^8.3.7",
-    "next": "^12.1.6",
-    "nodemailer": "^6.6.0",
-    "nookies": "^2.5.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-icons": "^4.2.0",
-    "sass": "^1.51.0",
-    "xss": "^1.0.10"
-  },
-  "devDependencies": {
-    "@types/gtag.js": "0.0.5",
-    "@types/node": "^15.3.0",
-    "@types/nodemailer": "^6.4.1",
-    "@types/react": "^17.0.5",
-    "@typescript-eslint/eslint-plugin": "^4.24.0",
-    "@typescript-eslint/parser": "^4.24.0",
-    "eslint": "^7.26.0",
-    "eslint-plugin-react": "^7.23.2",
-    "typescript": "^4.2.4"
-  }
+    "name": "helikuparinen.fi",
+    "version": "0.1.0",
+    "private": false,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint ./ --ext js,jsx,ts,tsx"
+    },
+    "dependencies": {
+        "@contentful/rich-text-html-renderer": "^14.1.2",
+        "@contentful/rich-text-react-renderer": "^14.1.3",
+        "contentful": "^8.3.7",
+        "next": "^12.1.6",
+        "nodemailer": "^6.6.0",
+        "nookies": "^2.5.2",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
+        "react-icons": "^4.2.0",
+        "sass": "^1.51.0",
+        "xss": "^1.0.10"
+    },
+    "devDependencies": {
+        "@types/gtag.js": "0.0.5",
+        "@types/node": "^15.3.0",
+        "@types/nodemailer": "^6.4.1",
+        "@types/react": "^17.0.5",
+        "@typescript-eslint/eslint-plugin": "^4.24.0",
+        "@typescript-eslint/parser": "^4.24.0",
+        "eslint": "^7.26.0",
+        "eslint-plugin-react": "^7.23.2",
+        "typescript": "^4.2.4"
+    }
 }

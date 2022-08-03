@@ -62,7 +62,7 @@ const Analytics = (): JSX.Element => {
                     <div className={styles.wrapper}>
                         <p>
                             {locale === 'fi-FI'
-                                ? 'Tämä sivu käyttää evästeitä kävijämäärien tilastoimiseen. Hyväksytäänkö evästeet?'
+                                ? 'Tämä sivusto käyttää evästeitä kävijämäärien tilastoimiseen. Hyväksytäänkö evästeet?'
                                 : 'This site uses cookies for visitor statistics. Allow cookies?'}
                         </p>
                         <div className={styles.buttons}>

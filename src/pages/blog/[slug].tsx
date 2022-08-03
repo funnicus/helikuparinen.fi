@@ -2,6 +2,7 @@ import { useEffect, FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from 'next/image';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { Entry } from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
@@ -26,14 +27,18 @@ const Post: FC<Props> = ({ post }) => {
 
     if (!post) return <span>Loading...</span>;
 
+    const file = post.fields.cover.fields.file;
+
     return (
         <div className={slugStyles.Slug}>
             <Head>
                 <title>{post.fields.title}</title>
                 <meta name="description" content={post.fields.excerpt} />
             </Head>
-            <img
-                src={`https:${post.fields.cover.fields.file.url}`}
+            <Image
+                src={`https:${file.url}`}
+                width={file.details.image.width}
+                height={file.details.image.height / 2}
                 alt={post.fields.cover.fields.title}
             />
             <h3>
