@@ -66,6 +66,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
                                               file.details.image.height
                                           )}
                                           objectFit="cover"
+                                          quality={65}
                                           alt={post.fields.cover.fields.title}
                                       />
                                       <div>
