@@ -1,8 +1,10 @@
 #about-me-nav {
     position: sticky;
-    top: 40vh;
+    top: 40%;
+    left: 30px;
     z-index: 1;
     height: 10vh;
+    width: fit-content;
 }
 
 #about-me-nav ul {
@@ -11,9 +13,8 @@
 }
 
 #about-me-nav li {
-  margin-top: 20px;
+    margin-top: 20px;
 }
-
 
 #about-me-nav ul li a {
     transition: color, 0.3s;

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Entry } from 'contentful';
 
@@ -22,6 +23,10 @@ const Blog = ({ posts }: Props): JSX.Element => {
         dispatch(setTheme({ background: '#fff', color: '#242424' }));
     }, []);
 
+    // A bit hacky, but works for now...
+    const getImageDimension = (dimension: number) =>
+        dimension * (250 / dimension);
+
     return (
         <div className={blogStyles.Blog}>
             <Head>
@@ -34,36 +39,55 @@ const Blog = ({ posts }: Props): JSX.Element => {
             <div className={blogStyles.posts}>
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
                 {posts
-                    ? posts.map((post) => {
-                          return (
-                              <div
-                                  className={blogStyles.post}
-                                  key={post.sys.id}
-                                  onClick={() =>
-                                      router.push(`/blog/${post.fields.slug}`)
-                                  }
-                              >
-                                  <img
-                                      src={`https:${post.fields.cover.fields.file.url}`}
-                                      alt={post.fields.cover.fields.title}
-                                  />
-                                  <div>
-                                      <p>
-                                          {locale === 'fi-FI'
-                                              ? getDateFI(post.fields.date)
-                                              : getDateUS(post.fields.date)}
-                                      </p>
-                                      <h2>{post.fields.title}</h2>
-                                      <p>{post.fields.excerpt}</p>
-                                      <Link href={`/blog/${post.fields.slug}`}>
-                                          {locale === 'fi-FI'
-                                              ? 'Lue Lisää'
-                                              : 'Read More'}
-                                      </Link>
+                    ? posts
+                          .sort(
+                              (postA, postB) =>
+                                  new Date(postB.fields.date).getTime() -
+                                  new Date(postA.fields.date).getTime()
+                          )
+                          .map((post) => {
+                              const file = post.fields.cover.fields.file;
+                              return (
+                                  <div
+                                      className={blogStyles.post}
+                                      key={post.sys.id}
+                                      onClick={() =>
+                                          router.push(
+                                              `/blog/${post.fields.slug}`
+                                          )
+                                      }
+                                  >
+                                      <Image
+                                          src={`https:${file.url}`}
+                                          width={getImageDimension(
+                                              file.details.image.width
+                                          )}
+                                          height={getImageDimension(
+                                              file.details.image.height
+                                          )}
+                                          objectFit="cover"
+                                          quality={65}
+                                          alt={post.fields.cover.fields.title}
+                                      />
+                                      <div>
+                                          <p>
+                                              {locale === 'fi-FI'
+                                                  ? getDateFI(post.fields.date)
+                                                  : getDateUS(post.fields.date)}
+                                          </p>
+                                          <h2>{post.fields.title}</h2>
+                                          <p>{post.fields.excerpt}</p>
+                                          <Link
+                                              href={`/blog/${post.fields.slug}`}
+                                          >
+                                              {locale === 'fi-FI'
+                                                  ? 'Lue Lisää'
+                                                  : 'Read More'}
+                                          </Link>
+                                      </div>
                                   </div>
-                              </div>
-                          );
-                      })
+                              );
+                          })
                     : null}
             </div>
         </div>

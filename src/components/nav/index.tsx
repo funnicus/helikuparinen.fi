@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useStateValue } from '@/state/index';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 
-import navStyles from './nav.module.css';
+import navStyles from './nav.module.scss';
 
 const Nav = (): JSX.Element => {
     const [style, setStyle] = useState(true);

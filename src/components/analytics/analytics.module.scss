@@ -1,29 +1,51 @@
 .banner {
     position: fixed;
-    bottom: 0;
-    width: 100%;
+    top: 30px;
+    margin: auto;
+    padding: 10px;
+
+    font-size: 0.8em;
+
+    width: fit-content;
     background: rgba(248, 248, 248, 0.904);
 
-    padding: 10px;
+    left: 0;
+    right: 0;
+
+    border-radius: 10px;
+
+    z-index: 10;
+    text-align: center;
+
+    animation: reveal-down 1.5s ease-in;
 }
 
 .wrapper {
+    display: flex;
     width: fit-content;
     margin: auto;
 }
 
 .buttons {
     display: flex;
+    width: 30%;
     justify-content: space-evenly;
     padding: 5px;
+
+    align-items: center;
 
     button {
         border: none;
         cursor: pointer;
 
+        display: flex;
+        align-items: center;
+
         font-size: 1.3rem;
 
         border-radius: 5px;
+
+        height: fit-content;
 
         &:hover {
             filter: brightness(0.9);
@@ -35,7 +57,16 @@
     }
 
     .deny {
-        background-color: yellow;
+        background-color: #dddddd;
         color: black;
+    }
+}
+
+@keyframes reveal-down {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0%);
     }
 }

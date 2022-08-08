@@ -22,7 +22,6 @@
     font-family: 'Alata', sans-serif;
 }
 
-
 .About > section > h2 {
     text-align: center;
 }
@@ -31,8 +30,21 @@
     padding: 10vh 0 10vh 0;
 }
 
+.focused-nav {
+    font-weight: bold;
+}
+
+@keyframes pop-out {
+    from {
+        transform: translateX(0px);
+    }
+    to {
+        transform: translateX(10px);
+    }
+}
+
 @media only screen and (max-width: 600px) {
-    .bio  {
+    .bio {
         flex-direction: column;
     }
 
@@ -42,12 +54,12 @@
 }
 
 @keyframes fadeInAbout {
-	from {
-		opacity: 0;
-		transform: translate3d(0, -0.2%, 0);
+    from {
+        opacity: 0;
+        transform: translate3d(0, -0.2%, 0);
     }
-	to {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-	}
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
