@@ -4,6 +4,8 @@
 
 EXIT_STATUS=0
 
+ls
+
 if [ "$NODE_ENV"="prod"  ]; then
     echo -e "\n-------- Deploying production build...\n"
 else
