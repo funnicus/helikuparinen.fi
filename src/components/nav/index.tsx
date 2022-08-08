@@ -19,7 +19,7 @@ const Nav = (): JSX.Element => {
     const toggleMenu = (state?: boolean) => setStyle(state || !style);
 
     useEffect(() => {
-        const handleRouteChange = () => toggleMenu(false);
+        const handleRouteChange = () => toggleMenu(true);
 
         events.on('routeChangeComplete', handleRouteChange);
 
