@@ -1,7 +1,8 @@
 .Blog {
     min-height: 100vh;
     max-width: 1200px;
-    margin: 5vh auto;
+    padding: 5vh 0;
+    margin: auto;
 }
 
 .Blog h1 {

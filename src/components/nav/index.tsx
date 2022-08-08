@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
@@ -13,10 +13,18 @@ const Nav = (): JSX.Element => {
 
     const [{ theme }] = useStateValue();
     //query erittäin tärkeä eikä tästä löydy tietoa mistään!
-    const { locale, pathname, query } = useRouter();
+    const { locale, pathname, query, events } = useRouter();
     const { width } = useWindowDimensions();
 
     const toggleMenu = () => setStyle(!style);
+
+    useEffect(() => {
+        const handleRouteChange = () => toggleMenu();
+
+        events.on('routeChangeComplete', handleRouteChange);
+
+        return () => events.off('routeChangeComplete', handleRouteChange);
+    }, []);
 
     const text = locale === 'fi-FI' ? 'In English' : 'Suomeksi';
     const nextLocale = locale === 'fi-FI' ? 'en-US' : 'fi-FI';

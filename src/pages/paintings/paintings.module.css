@@ -1,6 +1,8 @@
 .Paintings {
     max-width: 1200px;
     margin: auto;
+
+    padding: 5vh 0;
 }
 
 .Paintings > section {
@@ -36,19 +38,19 @@ Curently not used
     .paintingTall {
         grid-row: span 2 / auto;
     }
-    
+
     .paintingWide {
         grid-column: span 2 / auto;
     }
 }
 
 @keyframes fadeInPaintings {
-	from {
-		opacity: 0;
-		transform: translate3d(0, -0.2%, 0);
+    from {
+        opacity: 0;
+        transform: translate3d(0, -0.2%, 0);
     }
-	to {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-	}
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }
