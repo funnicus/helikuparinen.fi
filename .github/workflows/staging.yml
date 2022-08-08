@@ -37,6 +37,7 @@ jobs:
                   KEY: ${{ secrets.SSH_KEY }}
                   PORT: ${{ secrets.SSH_PORT }}
                   script: |
+                      cd ./beta.helikuparinen.fi
                       NODE_ENV=beta
                       sh ./deploy.sh
             - uses: actions/checkout@v2

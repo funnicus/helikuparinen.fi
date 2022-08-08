@@ -6,10 +6,8 @@ EXIT_STATUS=0
 
 if [ "$NODE_ENV"="prod"  ]; then
     echo -e "\n-------- Deploying production build...\n"
-    cd helikuparinen.fi/ || EXIT_STATUS=$?
 else
     echo -e "\n-------- Deploying beta build...\n"
-    cd beta.helikuparinen.fi/ || EXIT_STATUS=$?
 fi
 
 git pull || EXIT_STATUS=$?
