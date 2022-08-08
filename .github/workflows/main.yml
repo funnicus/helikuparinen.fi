@@ -37,12 +37,8 @@ jobs:
                   KEY: ${{ secrets.SSH_KEY }}
                   PORT: ${{ secrets.SSH_PORT }}
                   script: |
-                      cd helikuparinen.fi/
-                      git pull
-                      npm install
-                      npm i sharp --no-save
-                      npm run build
-                      pm2 restart prod
+                      NODE_ENV=prod
+                      sh ./deploy.sh
             - uses: actions/checkout@v2
             - name: Bump version and push tag
               if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
