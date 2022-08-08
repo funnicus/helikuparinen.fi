@@ -16,10 +16,10 @@ const Nav = (): JSX.Element => {
     const { locale, pathname, query, events } = useRouter();
     const { width } = useWindowDimensions();
 
-    const toggleMenu = () => setStyle(!style);
+    const toggleMenu = (state?: boolean) => setStyle(state || !style);
 
     useEffect(() => {
-        const handleRouteChange = () => toggleMenu();
+        const handleRouteChange = () => toggleMenu(false);
 
         events.on('routeChangeComplete', handleRouteChange);
 
@@ -31,7 +31,10 @@ const Nav = (): JSX.Element => {
 
     return (
         <div>
-            <button className={navStyles.dropdownBtn} onClick={toggleMenu}>
+            <button
+                className={navStyles.dropdownBtn}
+                onClick={() => toggleMenu()}
+            >
                 {!style ? <FaTimes /> : <FaBars />}
             </button>
             <nav
