@@ -123,7 +123,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
                 statement: string;
             }>(context.locale, 'statement'),
         },
-        revalidate: 60,
+        revalidate: 600,
     };
 };
 

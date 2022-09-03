@@ -99,7 +99,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         props: {
             posts: await getContent<Post>(context.locale, 'post'),
         },
-        revalidate: 30,
+        revalidate: 200,
     };
 };
 

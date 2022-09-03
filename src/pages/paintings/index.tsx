@@ -105,6 +105,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         props: {
             gallery: await getContent<Gallery>(context.locale, 'gallery'),
         },
+        revalidate: 600,
     };
 };
 
