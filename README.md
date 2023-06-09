@@ -8,11 +8,12 @@ The site is deployed at [https://helikuparinen.fi](https://helikuparinen.fi)!
 
 ## Developing this site 🚀
 
-You will need node.js (v14.*) and npm (v6.*) installed.
+You will need node.js (v14._) and npm (v6._) installed.
 
 Before starting to dev, you need to define an **.env.local** file on the project root.
 
 Inside:
+
 ```yml
 SPACE_ID=... # contentful space id token and...
 ACCESS_TOKEN=... # access token and...
@@ -65,6 +66,12 @@ Run the following command with env variables to build an image:
 
 ```sh
 docker build --build-arg SPACE_ID=<here> --build-arg ACCESS_TOKEN=<here> --build-arg PREVIEW_ACCESS_TOKEN=<here> --build-arg EMAILUSER=<here> --build-arg EMAILPASS=<here> --build-arg TO=<here> --build-arg GA=<analytics tag here> -t helikuparinen.fi .
+```
+
+And to run the container:
+
+```sh
+docker run -p 3000:3000 helikuparinen.fi
 ```
 
 ## More comprehensive documentation

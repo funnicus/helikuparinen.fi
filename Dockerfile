@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:18
 
 EXPOSE 3000
 
@@ -28,7 +28,7 @@ ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=$GA
 # Copy all of the content from the project to the image
 COPY . .
 
-RUN npm i
+RUN npm i --legacy-peer-deps
 RUN npm run build
 
 # And finally the command to run the application

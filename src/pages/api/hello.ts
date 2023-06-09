@@ -9,6 +9,5 @@ export default async (
 ): Promise<void> => {
     //1
     const response = await getContent('fi-FI', 'post');
-    console.log(response);
     res.status(200).json(response);
 };
