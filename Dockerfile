@@ -29,6 +29,7 @@ ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=$GA
 COPY . .
 
 RUN npm i --legacy-peer-deps
+RUN npm i sharp
 RUN npm run build
 
 # And finally the command to run the application
