@@ -77,7 +77,7 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                                 painting.fields.title +
                                                     ' ' +
                                                     painting.fields.description,
-                                                file
+                                                file,
                                             )
                                         }
                                         key={painting.sys.id}
@@ -85,9 +85,9 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                         <Image
                                             src={`https:${file.url}`}
                                             alt={painting.fields.title}
-                                            quality="30"
-                                            width={details.width}
-                                            height={details.height}
+                                            quality={30}
+                                            fill
+                                            style={{ objectFit: 'contain' }}
                                         />
                                     </div>
                                 );
