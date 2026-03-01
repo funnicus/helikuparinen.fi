@@ -2,13 +2,20 @@
 
 Next version (pun intended) website for the painter and my mom, **Heli Kuparinen**!
 
-As the last paragraph suggests, this site is created using **Next.js**, for better SEO than the old [CRApp](https://github.com/funnicus/helikuparinenhomepage)! Easier content managment is achieved trough contentful!
+As the last paragraph suggests, this site is created using **Next.js**, for better SEO than the old [CRApp](https://github.com/funnicus/helikuparinenhomepage)! Easier content management is achieved through Contentful!
 
 The site is deployed at [https://helikuparinen.fi](https://helikuparinen.fi)!
 
 ## Developing this site 🚀
 
-You will need node.js (v14._) and npm (v6._) installed.
+You will need **Node.js v20+** and **pnpm** installed.
+
+To install pnpm (if you don't have it already):
+
+```sh
+corepack enable
+corepack prepare pnpm@latest --activate
+```
 
 Before starting to dev, you need to define an **.env.local** file on the project root.
 
@@ -26,31 +33,37 @@ TO=recipient@email.com
 NEXT_PUBLIC_GOOGLE_ANALYTICS=G-SOMETHING
 ```
 
-Ask those from me (if for some reason I would need to give these out) or use your own contenful tokens and id's and email infos.
+Ask those from me (if for some reason I would need to give these out) or use your own Contentful tokens and IDs and email info.
 
 More about Next apps [here](./NEXT.md)!
 
 ### Scripts and other commands
 
 ```bash
+# install dependencies
+pnpm install
+
 # start dev server localhost:3000
-npm run dev
+pnpm dev
+
 # build production ready code
-npm run build
+pnpm build
+
 # start production server localhost:3000
-npm start
+pnpm start
+
 # lint the code with eslint (and fix automatically fixable errors)
-npm run lint -- --fix
+pnpm lint -- --fix
 
 # for server
 
 # production ~/helikuparinen.fi
-npm run build
-pm2 start npm --name "prod" -- start
+pnpm build
+pm2 start pnpm --name "prod" -- start
 
 # beta in ~/beta.helikuparinen.fi
-npm run build
-pm2 start npm --name "beta" -- start -- --port 8080
+pnpm build
+pm2 start pnpm --name "beta" -- start -- --port 8080
 
 # nginx
 # test that you have configured your nginx files correctly
@@ -65,7 +78,15 @@ sudo systemctl restart nginx
 Run the following command with env variables to build an image:
 
 ```sh
-docker build --build-arg SPACE_ID=<here> --build-arg ACCESS_TOKEN=<here> --build-arg PREVIEW_ACCESS_TOKEN=<here> --build-arg EMAILUSER=<here> --build-arg EMAILPASS=<here> --build-arg TO=<here> --build-arg GA=<analytics tag here> -t helikuparinen.fi .
+docker build \
+  --build-arg SPACE_ID=<here> \
+  --build-arg ACCESS_TOKEN=<here> \
+  --build-arg PREVIEW_ACCESS_TOKEN=<here> \
+  --build-arg EMAILUSER=<here> \
+  --build-arg EMAILPASS=<here> \
+  --build-arg TO=<here> \
+  --build-arg GA=<analytics tag here> \
+  -t helikuparinen.fi .
 ```
 
 And to run the container:
@@ -76,4 +97,4 @@ docker run -p 3000:3000 helikuparinen.fi
 
 ## More comprehensive documentation
 
-I have done some [documenting](./docs/TOC.md) for this project, mainly for my future self and Heli, but any other curious fella can take a look🙂
+I have done some [documenting](./docs/TOC.md) for this project, mainly for my future self and Heli, but any other curious fella can take a look 🙂
