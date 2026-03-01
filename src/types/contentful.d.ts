@@ -1,53 +1,59 @@
 import { Entry, Asset } from 'contentful';
+import { Document } from '@contentful/rich-text-types';
 
 export type AboutProps = {
     bio: Biography;
     curriculum: contentful.Entry<Curriculum>[];
     statement: Statement;
-}
+};
 
 export type PaintingsProps = {
     gallery: Entry<Gallery>[];
-}
+};
 
-export type ContentType = 'biography' | 'gallery' | 'statement' | 'curriculum' | 'post';
+export type ContentType =
+    | 'biography'
+    | 'gallery'
+    | 'statement'
+    | 'curriculum'
+    | 'post';
 
 //turha?
 export type Biography = {
     title: string;
     bio: string;
-}
+};
 
 export type Curriculum = {
     title: string;
     section: Array<Entry<CurriculumSection>>;
-}
+};
 
 //turha?
 export type Statement = {
     title: string;
     statement: string;
-}
+};
 
 type CurriculumSection = {
     title: string;
-    entries: Array<Entry<CurriculumEntry>>;     
-}
+    entries: Array<Entry<CurriculumEntry>>;
+};
 
 type CurriculumEntry = {
     content: string;
     year?: string;
-}
+};
 
 export type Gallery = {
     gallery: string;
     collections: Array<Entry<Collection>>;
-}
+};
 
 type Collection = {
     name: string;
     paintings: Array<Asset>;
-}
+};
 
 export type Post = {
     title: string;
@@ -55,8 +61,8 @@ export type Post = {
     cover: Asset;
     date: string;
     excerpt: string;
-    content: any;
-}
+    content: Document;
+};
 
 export type File = {
     url: string;
@@ -69,7 +75,7 @@ export type File = {
     };
     fileName: string;
     contentType: string;
-}
+};
 
 export type GetEntriesOpts = {
     field: string;

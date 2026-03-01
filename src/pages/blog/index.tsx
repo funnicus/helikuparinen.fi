@@ -43,7 +43,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
                           .sort(
                               (postA, postB) =>
                                   new Date(postB.fields.date).getTime() -
-                                  new Date(postA.fields.date).getTime()
+                                  new Date(postA.fields.date).getTime(),
                           )
                           .map((post) => {
                               const file = post.fields.cover.fields.file;
@@ -53,19 +53,19 @@ const Blog = ({ posts }: Props): JSX.Element => {
                                       key={post.sys.id}
                                       onClick={() =>
                                           router.push(
-                                              `/blog/${post.fields.slug}`
+                                              `/blog/${post.fields.slug}`,
                                           )
                                       }
                                   >
                                       <Image
                                           src={`https:${file.url}`}
                                           width={getImageDimension(
-                                              file.details.image.width
+                                              file.details.image.width,
                                           )}
                                           height={getImageDimension(
-                                              file.details.image.height
+                                              file.details.image.height,
                                           )}
-                                          objectFit="cover"
+                                          style={{ objectFit: 'cover' }}
                                           quality={65}
                                           alt={post.fields.cover.fields.title}
                                       />

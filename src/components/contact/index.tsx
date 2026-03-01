@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, FormEvent } from 'react';
 import { useRouter } from 'next/router';
 
 import Form from './form';
@@ -15,13 +15,13 @@ const Contact: FC = () => {
     const { locale } = useRouter();
     const { message, style, messageTimeout } = useMessage();
 
-    const handleContentChange = (e: ChangeEvent<HTMLInputElement>) =>
+    const handleContentChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
         setContent(e.target.value);
 
     const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
         setEmail(e.target.value);
 
-    const handleSubmit = async (e: Event) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
@@ -36,7 +36,7 @@ const Contact: FC = () => {
                 'ok',
                 locale === 'fi-FI'
                     ? 'Viesti lähetetty! Vastaan mahdollisimman pian...'
-                    : 'Mail send! I will respond as soon as possible...'
+                    : 'Mail send! I will respond as soon as possible...',
             );
             setEmail('');
             setContent('');

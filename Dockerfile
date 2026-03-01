@@ -1,8 +1,11 @@
-FROM node:18
+FROM node:20-alpine
 
 EXPOSE 3000
 
 WORKDIR /usr/src/app
+
+# Enable pnpm via corepack
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
 # https://www.gyanblog.com/javascript/nextjs-how-build-docker-with-api-url/
 # ARG
@@ -25,12 +28,17 @@ ENV EMAILPASS=$EMAILPASS
 ENV TO=$TO
 ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=$GA
 
-# Copy all of the content from the project to the image
+# Copy lockfile and manifests first for better layer caching
+COPY pnpm-lock.yaml package.json ./
+
+RUN pnpm fetch
+
+# Copy the rest of the source
 COPY . .
 
-RUN npm i --legacy-peer-deps
-RUN npm i sharp
-RUN npm run build
+RUN pnpm install --frozen-lockfile
+RUN pnpm add sharp
+RUN pnpm build
 
 # And finally the command to run the application
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]

@@ -1,24 +1,36 @@
 import Script from 'next/script';
 import React, { useEffect, useState } from 'react';
-import { parseCookies, setCookie } from 'nookies';
 import styles from './analytics.module.scss';
 import { useRouter } from 'next/router';
 import { FiCheck, FiX } from 'react-icons/fi';
 import { pageview } from '@/helpers/gtag';
 
+const getCookie = (name: string): string | undefined => {
+    if (typeof document === 'undefined') return undefined;
+    const match = document.cookie.match(
+        new RegExp('(?:^|; )' + name + '=([^;]*)'),
+    );
+    return match ? decodeURIComponent(match[1]) : undefined;
+};
+
+const setCookie = (name: string, value: string): void => {
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=31536000; SameSite=Lax`;
+};
+
 const Analytics = (): JSX.Element => {
-    const cookies = parseCookies();
     const { locale, events, asPath } = useRouter();
 
     const isProduction = process.env.NODE_ENV === 'production';
-    const bannerShown = !!cookies.bannerShown;
-    const cookiesEnabled = cookies.cookiesEnabled === 'true';
 
-    // show banner if it has not been dismissed by user yet
-    const [showBanner, setShowBanner] = useState(!bannerShown);
+    const [showBanner, setShowBanner] = useState(false);
+    const [cookiesEnabled, setCookiesEnabled] = useState(false);
     const [hasMounted, setHasMounted] = useState(false);
 
     useEffect(() => {
+        const bannerShown = !!getCookie('bannerShown');
+        const enabled = getCookie('cookiesEnabled') === 'true';
+        setShowBanner(!bannerShown);
+        setCookiesEnabled(enabled);
         setHasMounted(true);
     }, []);
 
@@ -35,17 +47,19 @@ const Analytics = (): JSX.Element => {
     }, [events, cookiesEnabled]);
 
     const closeBanner = () => {
-        setCookie(null, 'bannerShown', 'true');
+        setCookie('bannerShown', 'true');
         setShowBanner(false);
     };
 
     const acceptTracking = () => {
-        setCookie(null, 'cookiesEnabled', 'true');
+        setCookie('cookiesEnabled', 'true');
+        setCookiesEnabled(true);
         closeBanner();
     };
 
     const denyTracking = () => {
-        setCookie(null, 'cookiesEnabled', 'false');
+        setCookie('cookiesEnabled', 'false');
+        setCookiesEnabled(false);
         closeBanner();
     };
 
