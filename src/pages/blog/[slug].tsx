@@ -12,6 +12,10 @@ import { useStateValue, setTheme } from '@/state/index';
 import { getDateFI, getDateUS } from '@/helpers/parseDates';
 import { options } from '@/helpers/options';
 import Seo from '@/components/seo';
+import JsonLd, {
+    blogPostingSchema,
+    breadcrumbSchema,
+} from '@/components/seo/JsonLd';
 import slugStyles from './slug.module.css';
 
 const Post: FC<Props> = ({ post }) => {
@@ -31,6 +35,34 @@ const Post: FC<Props> = ({ post }) => {
     const ogImage = `https:${file.url}`;
     const title = `${post.fields.title} | Heli Kuparinen`;
 
+    const jsonLdData = [
+        blogPostingSchema({
+            title: post.fields.title,
+            excerpt: post.fields.excerpt,
+            date: post.fields.date,
+            slug: post.fields.slug,
+            coverUrl: ogImage,
+            locale,
+        }),
+        breadcrumbSchema([
+            { name: 'Heli Kuparinen', url: 'https://helikuparinen.fi' },
+            {
+                name: locale === 'fi-FI' ? 'Blogi' : 'Blog',
+                url:
+                    locale === 'fi-FI'
+                        ? 'https://helikuparinen.fi/blog'
+                        : 'https://helikuparinen.fi/en-US/blog',
+            },
+            {
+                name: post.fields.title,
+                url:
+                    locale === 'fi-FI'
+                        ? `https://helikuparinen.fi/blog/${post.fields.slug}`
+                        : `https://helikuparinen.fi/en-US/blog/${post.fields.slug}`,
+            },
+        ]),
+    ];
+
     return (
         <div className={slugStyles.Slug}>
             <Seo
@@ -40,6 +72,7 @@ const Post: FC<Props> = ({ post }) => {
                 ogImage={ogImage}
                 ogImageAlt={post.fields.cover.fields.title}
             />
+            <JsonLd data={jsonLdData} />
             <Image
                 src={ogImage}
                 width={file.details.image.width}

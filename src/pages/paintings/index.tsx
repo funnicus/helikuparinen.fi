@@ -5,6 +5,11 @@ import Image from 'next/image';
 
 import ImageOverlay from '@/components/imageOverlay';
 import Seo from '@/components/seo';
+import JsonLd, {
+    artGallerySchema,
+    breadcrumbSchema,
+    SITE_URL,
+} from '@/components/seo/JsonLd';
 import { getContent } from '@/services/contentful';
 import { PaintingsProps, Gallery, File } from '@/types/contentful';
 
@@ -48,9 +53,32 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
             ? 'Tutustu Heli Kuparisen maalauksiin ja kokoelmiin. Heli työskentelee pääasiassa öljyväreillä ja kuvaa ihmisiä teoksissaan.'
             : 'Browse paintings and collections by Heli Kuparinen. Heli works primarily with oil paints and portrays people in her works.';
 
+    // Collect all paintings for structured data
+    const allArtworks = gallery[0].fields.collections.flatMap((collection) =>
+        collection.fields.paintings.map((painting) => ({
+            name: painting.fields.title,
+            description: painting.fields.description as string | undefined,
+            imageUrl: `https:${(painting.fields.file as File).url}`,
+        })),
+    );
+
+    const localePath = locale === 'fi-FI' ? '' : `/${locale}`;
+
     return (
         <div className={paintingsStyles.Paintings}>
             <Seo title={title} description={description} />
+            <JsonLd
+                data={[
+                    artGallerySchema(allArtworks),
+                    breadcrumbSchema([
+                        { name: 'Heli Kuparinen', url: SITE_URL },
+                        {
+                            name: locale === 'fi-FI' ? 'Teokset' : 'Paintings',
+                            url: `${SITE_URL}${localePath}/paintings`,
+                        },
+                    ]),
+                ]}
+            />
             {imageFile ? (
                 <ImageOverlay
                     visible={visible}

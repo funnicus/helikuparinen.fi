@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Entry } from 'contentful';
 
 import Seo from '@/components/seo';
+import JsonLd, { breadcrumbSchema, SITE_URL } from '@/components/seo/JsonLd';
 import { useStateValue, setTheme } from '@/state/index';
 import { getContent } from '@/services/contentful';
 import { Post } from '@/types/contentful';
@@ -35,9 +36,18 @@ const Blog = ({ posts }: Props): JSX.Element => {
             ? 'Blogikirjoituksia Helin taiteesta ja arjesta.'
             : "Blog posts about Heli's art and day to day life.";
 
+    const breadcrumb = breadcrumbSchema([
+        { name: 'Heli Kuparinen', url: SITE_URL },
+        {
+            name: locale === 'fi-FI' ? 'Blogi' : 'Blog',
+            url: `${SITE_URL}${locale === 'fi-FI' ? '' : '/' + locale}/blog`,
+        },
+    ]);
+
     return (
         <div className={blogStyles.Blog}>
             <Seo title={title} description={description} />
+            <JsonLd data={breadcrumb} />
             <div className={blogStyles.posts}>
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
                 {posts

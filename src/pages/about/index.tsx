@@ -5,6 +5,11 @@ import Image from 'next/image';
 
 import Curriculum from '@/components/curriculum';
 import Seo from '@/components/seo';
+import JsonLd, {
+    personSchema,
+    breadcrumbSchema,
+    SITE_URL,
+} from '@/components/seo/JsonLd';
 
 import { getSingleContent, getContent } from '@/services/contentful';
 import { AboutProps, Curriculum as CV } from '@/types/contentful';
@@ -12,6 +17,7 @@ import { AboutProps, Curriculum as CV } from '@/types/contentful';
 import { useStateValue, setTheme } from '@/state/index';
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import useScrollPosition, { IScrollProps } from '@/hooks/useScrollPosition';
+import { useRouter } from 'next/router';
 
 import aboutStyles from './about.module.scss';
 
@@ -19,6 +25,8 @@ type Focus = 'about' | 'cv' | 'statement';
 
 const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
     const [{ theme }, dispatch] = useStateValue();
+    const { locale } = useRouter();
+    const isFi = locale === 'fi-FI';
 
     const [navFocus, setNavFocus] = useState<Focus>('about');
 
@@ -67,6 +75,18 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
                 }
                 ogImage="https://helikuparinen.fi/profile-heli.png"
                 ogImageAlt="Portrait of Heli Kuparinen, visual artist"
+            />
+            <JsonLd
+                data={[
+                    personSchema(),
+                    breadcrumbSchema([
+                        { name: 'Heli Kuparinen', url: SITE_URL },
+                        {
+                            name: isFi ? 'Tietoa minusta' : 'About Me',
+                            url: `${SITE_URL}${isFi ? '' : '/en-US'}/about`,
+                        },
+                    ]),
+                ]}
             />
             {width > 950 ? (
                 <nav id="about-me-nav">

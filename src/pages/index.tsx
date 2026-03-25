@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import Font from '@/components/font';
 import Seo from '@/components/seo';
+import JsonLd, { websiteSchema, personSchema } from '@/components/seo/JsonLd';
 import { useStateValue, setTheme } from '@/state/index';
 
 import indexStyles from './index.module.css';
@@ -27,6 +28,7 @@ export default function Home(): JSX.Element {
                         : 'Heli Kuparinen, a Visual Artist/Painter. Heli paints mostly with oil paints and likes to portray people on her works.'
                 }
             />
+            <JsonLd data={[websiteSchema(), personSchema()]} />
             <header>
                 <Font />
                 <h1>{isFi ? 'Taidemaalari' : 'Visual Artist'}</h1>
