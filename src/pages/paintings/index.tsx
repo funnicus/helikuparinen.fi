@@ -86,8 +86,10 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                                             src={`https:${file.url}`}
                                             alt={painting.fields.title}
                                             quality={30}
+                                            loading="eager"
                                             fill
                                             style={{ objectFit: 'contain' }}
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         />
                                     </div>
                                 );

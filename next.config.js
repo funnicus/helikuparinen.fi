@@ -10,5 +10,6 @@ module.exports = {
                 hostname: 'images.ctfassets.net',
             },
         ],
+        qualities: [25, 30, 50, 75],
     },
 };
