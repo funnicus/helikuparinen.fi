@@ -2,11 +2,11 @@
 import { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Entry } from 'contentful';
 
+import Seo from '@/components/seo';
 import { useStateValue, setTheme } from '@/state/index';
 import { getContent } from '@/services/contentful';
 import { Post } from '@/types/contentful';
@@ -27,15 +27,17 @@ const Blog = ({ posts }: Props): JSX.Element => {
     const getImageDimension = (dimension: number) =>
         dimension * (250 / dimension);
 
+    const title =
+        locale === 'fi-FI' ? 'Blogi | Heli Kuparinen' : 'Blog | Heli Kuparinen';
+
+    const description =
+        locale === 'fi-FI'
+            ? 'Blogikirjoituksia Helin taiteesta ja arjesta.'
+            : "Blog posts about Heli's art and day to day life.";
+
     return (
         <div className={blogStyles.Blog}>
-            <Head>
-                <title>About me</title>
-                <meta
-                    name="description"
-                    content="Blogs about Heli&#39;s art and day to day life."
-                />
-            </Head>
+            <Seo title={title} description={description} />
             <div className={blogStyles.posts}>
                 <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
                 {posts

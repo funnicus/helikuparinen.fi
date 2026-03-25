@@ -1,7 +1,6 @@
 import { useEffect, FC } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
 import Image from 'next/image';
 import { FaCalendarAlt } from 'react-icons/fa';
 import { Entry } from 'contentful';
@@ -12,6 +11,7 @@ import { Post as Blog } from '@/types/contentful';
 import { useStateValue, setTheme } from '@/state/index';
 import { getDateFI, getDateUS } from '@/helpers/parseDates';
 import { options } from '@/helpers/options';
+import Seo from '@/components/seo';
 import slugStyles from './slug.module.css';
 
 const Post: FC<Props> = ({ post }) => {
@@ -28,15 +28,20 @@ const Post: FC<Props> = ({ post }) => {
     if (!post) return <span>Loading...</span>;
 
     const file = post.fields.cover.fields.file;
+    const ogImage = `https:${file.url}`;
+    const title = `${post.fields.title} | Heli Kuparinen`;
 
     return (
         <div className={slugStyles.Slug}>
-            <Head>
-                <title>{post.fields.title}</title>
-                <meta name="description" content={post.fields.excerpt} />
-            </Head>
+            <Seo
+                title={title}
+                description={post.fields.excerpt}
+                ogType="article"
+                ogImage={ogImage}
+                ogImageAlt={post.fields.cover.fields.title}
+            />
             <Image
-                src={`https:${file.url}`}
+                src={ogImage}
                 width={file.details.image.width}
                 height={file.details.image.height / 2}
                 alt={post.fields.cover.fields.title}
@@ -85,15 +90,15 @@ export const getStaticProps: GetStaticProps = async ({
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
     const allPosts = await getContent<Blog>('en-US', 'post');
 
-    const paths = [];
+    const paths: { params: { slug: string }; locale: string }[] = [];
 
     for (const locale of locales) {
-        paths.concat(
+        const localePaths =
             allPosts?.map((post) => ({
                 params: { slug: post.fields.slug },
                 locale,
-            })) ?? []
-        );
+            })) ?? [];
+        paths.push(...localePaths);
     }
 
     return {

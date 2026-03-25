@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 
 import ImageOverlay from '@/components/imageOverlay';
+import Seo from '@/components/seo';
 import { getContent } from '@/services/contentful';
 import { PaintingsProps, Gallery, File } from '@/types/contentful';
 
 import useWindowDimensions from '@/hooks/useWindowDimensions';
 import { useStateValue, setTheme } from '@/state/index';
+import { useRouter } from 'next/router';
 
 import paintingsStyles from './paintings.module.css';
 
@@ -20,6 +21,7 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
 
     const { width } = useWindowDimensions();
     const [, dispatch] = useStateValue();
+    const { locale } = useRouter();
 
     useEffect(() => {
         dispatch(setTheme({ background: '#fff', color: '#242424' }));
@@ -36,15 +38,19 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
         setVisible(!visible);
     };
 
+    const title =
+        locale === 'fi-FI'
+            ? 'Teokset | Heli Kuparinen'
+            : 'Paintings | Heli Kuparinen';
+
+    const description =
+        locale === 'fi-FI'
+            ? 'Tutustu Heli Kuparisen maalauksiin ja kokoelmiin. Heli työskentelee pääasiassa öljyväreillä ja kuvaa ihmisiä teoksissaan.'
+            : 'Browse paintings and collections by Heli Kuparinen. Heli works primarily with oil paints and portrays people in her works.';
+
     return (
         <div className={paintingsStyles.Paintings}>
-            <Head>
-                <title>Gallery</title>
-                <meta
-                    name="description"
-                    content="Here you can see all my paintnigs and the collections associated with them."
-                />
-            </Head>
+            <Seo title={title} description={description} />
             {imageFile ? (
                 <ImageOverlay
                     visible={visible}

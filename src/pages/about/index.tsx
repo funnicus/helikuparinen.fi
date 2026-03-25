@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 
 import Curriculum from '@/components/curriculum';
+import Seo from '@/components/seo';
 
 import { getSingleContent, getContent } from '@/services/contentful';
 import { AboutProps, Curriculum as CV } from '@/types/contentful';
@@ -54,17 +54,20 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
 
     return (
         <div>
-            <Head>
-                <title>About me</title>
-                <meta
-                    name="description"
-                    content="Heli Kuparinen is a Helsinki-based artist who mainly works with oilpaints. 
-                Currently, I am particulary interested in portraying people in
-                my works. On the background, I have a solid understanding 
-                of the living model, aqcuired from my studies, as well as an academic degree
-                in painting."
-                />
-            </Head>
+            <Seo
+                title={
+                    bio.title === 'About me'
+                        ? 'About Me | Heli Kuparinen'
+                        : `${bio.title} | Heli Kuparinen`
+                }
+                description={
+                    bio.bio.length > 160
+                        ? bio.bio.substring(0, 157) + '...'
+                        : bio.bio
+                }
+                ogImage="https://helikuparinen.fi/profile-heli.png"
+                ogImageAlt="Portrait of Heli Kuparinen, visual artist"
+            />
             {width > 950 ? (
                 <nav id="about-me-nav">
                     <ul>
@@ -89,7 +92,7 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
                     <div>
                         <Image
                             src="/profile-heli.png"
-                            alt="Picture of the author"
+                            alt="Portrait of Heli Kuparinen, visual artist"
                             width={300}
                             height={300}
                         />
@@ -115,7 +118,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
         props: {
             bio: await getSingleContent<{ title: string; bio: string }>(
                 context.locale,
-                'biography'
+                'biography',
             ),
             curriculum: await getContent<CV>(context.locale, 'curriculum'),
             statement: await getSingleContent<{
