@@ -2,6 +2,8 @@
 
 # Deployment
 
+_This documentation is somewhat dated, since the current deployement is on vercel for ease-of-maintanance!_
+
 Currently our deployment process uses a **GitHub Actions** pipeline. The main pipeline process is described in a file called [main.yml](../.github/workflows/main.yml) and is written with **YAML**. The pipeline is somewhat based on the free online university of Helsinki course's *Fullstack open* [chapter 11](https://fullstackopen.com/en/part11) pipeline.
 
 What does our pipeline do exactly? It lints and checks the project builds on pull request. If the pull request is merged to master or commits are pushed to master, the pipeline also tries to deploy our code and version our code (more about versioning in this project below). In deployment, we use [appleboy/ssh-action](https://github.com/appleboy/ssh-action) to run scripts remotly on our Digital Ocean server. SSH login information is stored in GitHub secrets! rember that if you want to run your pipelines locally for testing purposes, there is a great [tool](https://github.com/nektos/act) for that! While developing pipelines, keep in mind that GitHub Actions have a limited monthly free hours, so try to make your pipelines consume as little time as possible!

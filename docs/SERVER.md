@@ -2,6 +2,8 @@
 
 # Server and Hosting
 
+_This documentation is dated, since the current deployement is on vercel for ease-of-maintanance!_
+
 The server setup for this site is a little (you could say unnecessarily) more complex than for your usual simple React app of any kind. We are not using Heroku or Netlify or Vercel or any of those things, which do alot of the work for you. This project uses custom made Digital Ocean server with **Ubuntu 18.04** and [Nginx](https://www.nginx.com/) for proxying the requests to the right apps.
 
 Why? Only the lord in the heavens above knows. Originally I used this server to host the older version of the website for my mom, which I created in the summer of 2020. I actually don't remember why I chose to setup my own server. Going the Heroku or Netlify route would have been much easier but hey, atleast I learned about sys-admin/devops stuff🙂 Since I already had this server, why not use it for my new app also?
@@ -68,4 +70,3 @@ If you want know more about creating a server like this on Digital Ocean, follow
 - Nginx install: https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04
 - Let's Encrypt for Nginx: https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04
 - Node.js app to production: https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04
-
