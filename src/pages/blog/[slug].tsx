@@ -16,6 +16,7 @@ import JsonLd, {
     blogPostingSchema,
     breadcrumbSchema,
 } from '@/components/seo/JsonLd';
+import Breadcrumb from '@/components/breadcrumb';
 import slugStyles from './slug.module.css';
 
 const Post: FC<Props> = ({ post }) => {
@@ -34,6 +35,7 @@ const Post: FC<Props> = ({ post }) => {
     const file = post.fields.cover.fields.file;
     const ogImage = `https:${file.url}`;
     const title = `${post.fields.title} | Heli Kuparinen`;
+    const isFi = locale === 'fi-FI';
 
     const jsonLdData = [
         blogPostingSchema({
@@ -47,18 +49,16 @@ const Post: FC<Props> = ({ post }) => {
         breadcrumbSchema([
             { name: 'Heli Kuparinen', url: 'https://helikuparinen.fi' },
             {
-                name: locale === 'fi-FI' ? 'Blogi' : 'Blog',
-                url:
-                    locale === 'fi-FI'
-                        ? 'https://helikuparinen.fi/blog'
-                        : 'https://helikuparinen.fi/en-US/blog',
+                name: isFi ? 'Blogi' : 'Blog',
+                url: isFi
+                    ? 'https://helikuparinen.fi/blog'
+                    : 'https://helikuparinen.fi/en-US/blog',
             },
             {
                 name: post.fields.title,
-                url:
-                    locale === 'fi-FI'
-                        ? `https://helikuparinen.fi/blog/${post.fields.slug}`
-                        : `https://helikuparinen.fi/en-US/blog/${post.fields.slug}`,
+                url: isFi
+                    ? `https://helikuparinen.fi/blog/${post.fields.slug}`
+                    : `https://helikuparinen.fi/en-US/blog/${post.fields.slug}`,
             },
         ]),
     ];
@@ -73,19 +73,41 @@ const Post: FC<Props> = ({ post }) => {
                 ogImageAlt={post.fields.cover.fields.title}
             />
             <JsonLd data={jsonLdData} />
-            <Image
-                src={ogImage}
-                width={file.details.image.width}
-                height={file.details.image.height / 2}
-                alt={post.fields.cover.fields.title}
+            <Breadcrumb
+                items={[
+                    { label: 'Heli Kuparinen', href: '/' },
+                    {
+                        label: isFi ? 'Blogi' : 'Blog',
+                        href: '/blog',
+                    },
+                    {
+                        label: post.fields.title,
+                        href: `/blog/${post.fields.slug}`,
+                    },
+                ]}
             />
-            <h3>
-                <FaCalendarAlt style={{ color: 'green' }} />{' '}
-                {locale === 'fi-FI'
-                    ? getDateFI(post.fields.date)
-                    : getDateUS(post.fields.date)}
-            </h3>
-            {documentToReactComponents(post.fields.content, options)}
+            <article>
+                <Image
+                    src={ogImage}
+                    width={file.details.image.width}
+                    height={file.details.image.height / 2}
+                    alt={post.fields.cover.fields.title}
+                />
+                <header>
+                    <h1>{post.fields.title}</h1>
+                    <h3>
+                        <FaCalendarAlt style={{ color: 'green' }} />{' '}
+                        <time dateTime={post.fields.date}>
+                            {isFi
+                                ? getDateFI(post.fields.date)
+                                : getDateUS(post.fields.date)}
+                        </time>
+                    </h3>
+                </header>
+                <section>
+                    {documentToReactComponents(post.fields.content, options)}
+                </section>
+            </article>
         </div>
     );
 };

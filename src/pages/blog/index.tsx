@@ -8,6 +8,7 @@ import { Entry } from 'contentful';
 
 import Seo from '@/components/seo';
 import JsonLd, { breadcrumbSchema, SITE_URL } from '@/components/seo/JsonLd';
+import Breadcrumb from '@/components/breadcrumb';
 import { useStateValue, setTheme } from '@/state/index';
 import { getContent } from '@/services/contentful';
 import { Post } from '@/types/contentful';
@@ -19,6 +20,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
     const router = useRouter();
     const { locale } = router;
     const [, dispatch] = useStateValue();
+    const isFi = locale === 'fi-FI';
 
     useEffect(() => {
         dispatch(setTheme({ background: '#fff', color: '#242424' }));
@@ -28,19 +30,17 @@ const Blog = ({ posts }: Props): JSX.Element => {
     const getImageDimension = (dimension: number) =>
         dimension * (250 / dimension);
 
-    const title =
-        locale === 'fi-FI' ? 'Blogi | Heli Kuparinen' : 'Blog | Heli Kuparinen';
+    const title = isFi ? 'Blogi | Heli Kuparinen' : 'Blog | Heli Kuparinen';
 
-    const description =
-        locale === 'fi-FI'
-            ? 'Blogikirjoituksia Helin taiteesta ja arjesta.'
-            : "Blog posts about Heli's art and day to day life.";
+    const description = isFi
+        ? 'Blogikirjoituksia Helin taiteesta ja arjesta.'
+        : "Blog posts about Heli's art and day to day life.";
 
     const breadcrumb = breadcrumbSchema([
         { name: 'Heli Kuparinen', url: SITE_URL },
         {
-            name: locale === 'fi-FI' ? 'Blogi' : 'Blog',
-            url: `${SITE_URL}${locale === 'fi-FI' ? '' : '/' + locale}/blog`,
+            name: isFi ? 'Blogi' : 'Blog',
+            url: `${SITE_URL}${isFi ? '' : '/' + locale}/blog`,
         },
     ]);
 
@@ -48,8 +48,14 @@ const Blog = ({ posts }: Props): JSX.Element => {
         <div className={blogStyles.Blog}>
             <Seo title={title} description={description} />
             <JsonLd data={breadcrumb} />
-            <div className={blogStyles.posts}>
-                <h1>{locale === 'fi-FI' ? 'Blogi' : 'Blog'}</h1>
+            <Breadcrumb
+                items={[
+                    { label: 'Heli Kuparinen', href: '/' },
+                    { label: isFi ? 'Blogi' : 'Blog', href: '/blog' },
+                ]}
+            />
+            <section className={blogStyles.posts}>
+                <h1>{isFi ? 'Blogi' : 'Blog'}</h1>
                 {posts
                     ? posts
                           .sort(
@@ -60,7 +66,7 @@ const Blog = ({ posts }: Props): JSX.Element => {
                           .map((post) => {
                               const file = post.fields.cover.fields.file;
                               return (
-                                  <div
+                                  <article
                                       className={blogStyles.post}
                                       key={post.sys.id}
                                       onClick={() =>
@@ -83,25 +89,29 @@ const Blog = ({ posts }: Props): JSX.Element => {
                                       />
                                       <div>
                                           <p>
-                                              {locale === 'fi-FI'
-                                                  ? getDateFI(post.fields.date)
-                                                  : getDateUS(post.fields.date)}
+                                              <time dateTime={post.fields.date}>
+                                                  {isFi
+                                                      ? getDateFI(
+                                                            post.fields.date,
+                                                        )
+                                                      : getDateUS(
+                                                            post.fields.date,
+                                                        )}
+                                              </time>
                                           </p>
                                           <h2>{post.fields.title}</h2>
                                           <p>{post.fields.excerpt}</p>
                                           <Link
                                               href={`/blog/${post.fields.slug}`}
                                           >
-                                              {locale === 'fi-FI'
-                                                  ? 'Lue Lisää'
-                                                  : 'Read More'}
+                                              {isFi ? 'Lue Lisää' : 'Read More'}
                                           </Link>
                                       </div>
-                                  </div>
+                                  </article>
                               );
                           })
                     : null}
-            </div>
+            </section>
         </div>
     );
 };

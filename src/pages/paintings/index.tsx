@@ -10,6 +10,7 @@ import JsonLd, {
     breadcrumbSchema,
     SITE_URL,
 } from '@/components/seo/JsonLd';
+import Breadcrumb from '@/components/breadcrumb';
 import { getContent } from '@/services/contentful';
 import { PaintingsProps, Gallery, File } from '@/types/contentful';
 
@@ -28,6 +29,8 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
     const [, dispatch] = useStateValue();
     const { locale } = useRouter();
 
+    const isFi = locale === 'fi-FI';
+
     useEffect(() => {
         dispatch(setTheme({ background: '#fff', color: '#242424' }));
     }, []);
@@ -43,15 +46,13 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
         setVisible(!visible);
     };
 
-    const title =
-        locale === 'fi-FI'
-            ? 'Teokset | Heli Kuparinen'
-            : 'Paintings | Heli Kuparinen';
+    const title = isFi
+        ? 'Teokset | Heli Kuparinen'
+        : 'Paintings | Heli Kuparinen';
 
-    const description =
-        locale === 'fi-FI'
-            ? 'Tutustu Heli Kuparisen maalauksiin ja kokoelmiin. Heli työskentelee pääasiassa öljyväreillä ja kuvaa ihmisiä teoksissaan.'
-            : 'Browse paintings and collections by Heli Kuparinen. Heli works primarily with oil paints and portrays people in her works.';
+    const description = isFi
+        ? 'Tutustu Heli Kuparisen maalauksiin ja kokoelmiin. Heli työskentelee pääasiassa öljyväreillä ja kuvaa ihmisiä teoksissaan.'
+        : 'Browse paintings and collections by Heli Kuparinen. Heli works primarily with oil paints and portrays people in her works.';
 
     // Collect all paintings for structured data
     const allArtworks = gallery[0].fields.collections.flatMap((collection) =>
@@ -62,7 +63,7 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
         })),
     );
 
-    const localePath = locale === 'fi-FI' ? '' : `/${locale}`;
+    const localePath = isFi ? '' : `/${locale}`;
 
     return (
         <div className={paintingsStyles.Paintings}>
@@ -73,10 +74,19 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                     breadcrumbSchema([
                         { name: 'Heli Kuparinen', url: SITE_URL },
                         {
-                            name: locale === 'fi-FI' ? 'Teokset' : 'Paintings',
+                            name: isFi ? 'Teokset' : 'Paintings',
                             url: `${SITE_URL}${localePath}/paintings`,
                         },
                     ]),
+                ]}
+            />
+            <Breadcrumb
+                items={[
+                    { label: 'Heli Kuparinen', href: '/' },
+                    {
+                        label: isFi ? 'Teokset' : 'Paintings',
+                        href: '/paintings',
+                    },
                 ]}
             />
             {imageFile ? (

@@ -8,8 +8,10 @@ import Seo from '@/components/seo';
 import JsonLd, {
     personSchema,
     breadcrumbSchema,
+    faqPageSchema,
     SITE_URL,
 } from '@/components/seo/JsonLd';
+import Breadcrumb from '@/components/breadcrumb';
 
 import { getSingleContent, getContent } from '@/services/contentful';
 import { AboutProps, Curriculum as CV } from '@/types/contentful';
@@ -22,6 +24,37 @@ import { useRouter } from 'next/router';
 import aboutStyles from './about.module.scss';
 
 type Focus = 'about' | 'cv' | 'statement';
+
+const faqItems = {
+    'fi-FI': [
+        {
+            question: 'Kuka on Heli Kuparinen?',
+            answer: 'Heli Kuparinen on helsinkiläinen taidemaalari, joka työskentelee pääasiassa öljyväreillä. Hänellä on akateeminen tutkinto maalaustaiteen alalta.',
+        },
+        {
+            question: 'Millä tekniikalla Heli työskentelee?',
+            answer: 'Heli työskentelee pääasiassa öljyväreillä ja kuvaa teoksissaan ihmisiä. Hänellä on vankka osaaminen elävän mallin kuvaamisessa.',
+        },
+        {
+            question: 'Missä Heli Kuparinen asuu ja työskentelee?',
+            answer: 'Heli Kuparinen asuu ja työskentelee Helsingissä, Suomessa.',
+        },
+    ],
+    'en-US': [
+        {
+            question: 'Who is Heli Kuparinen?',
+            answer: 'Heli Kuparinen is a Helsinki-based visual artist and painter who works primarily with oil paints. She holds an academic degree in painting.',
+        },
+        {
+            question: 'What medium does Heli work with?',
+            answer: 'Heli works primarily with oil paints and is particularly interested in portraying people in her works. She has a solid understanding of the living model acquired from her studies.',
+        },
+        {
+            question: 'Where is Heli Kuparinen based?',
+            answer: 'Heli Kuparinen is based in Helsinki, Finland.',
+        },
+    ],
+};
 
 const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
     const [{ theme }, dispatch] = useStateValue();
@@ -60,6 +93,8 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
         dispatch(setTheme({ background: '#aebfbe', color: '#000' }));
     }, []);
 
+    const currentFaq = isFi ? faqItems['fi-FI'] : faqItems['en-US'];
+
     return (
         <div>
             <Seo
@@ -86,19 +121,37 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
                             url: `${SITE_URL}${isFi ? '' : '/en-US'}/about`,
                         },
                     ]),
+                    faqPageSchema(currentFaq),
+                ]}
+            />
+            <Breadcrumb
+                items={[
+                    { label: 'Heli Kuparinen', href: '/' },
+                    {
+                        label: isFi ? 'Tietoa minusta' : 'About Me',
+                        href: '/about',
+                    },
                 ]}
             />
             {width > 950 ? (
-                <nav id="about-me-nav">
+                <nav
+                    id="about-me-nav"
+                    aria-label={isFi ? 'Sivun sisältö' : 'Page sections'}
+                >
                     <ul>
                         <li className={isFocused('about')}>
-                            <a href="#about">About me</a>
+                            <a href="#about">
+                                {isFi ? 'Tietoa minusta' : 'About me'}
+                            </a>
                         </li>
                         <li className={isFocused('cv')}>
                             <a href="#curriculum">Curriculum</a>
                         </li>
                         <li className={isFocused('statement')}>
                             <a href="#statement">Statement</a>
+                        </li>
+                        <li className={isFocused('statement')}>
+                            <a href="#faq">FAQ</a>
                         </li>
                     </ul>
                 </nav>
@@ -118,16 +171,34 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
                         />
                     </div>
                 </section>
-                <hr></hr>
+                <hr />
                 <section id="curriculum">
                     <Curriculum curriculum={curriculum} />
                 </section>
-                <hr></hr>
+                <hr />
                 <section id="statement">
                     <h2>{statement.title}</h2>
                     <article>{statementMapped}</article>
                 </section>
-                <hr></hr>
+                <hr />
+                <section id="faq">
+                    <h2>
+                        {isFi
+                            ? 'Usein kysytyt kysymykset'
+                            : 'Frequently Asked Questions'}
+                    </h2>
+                    <dl>
+                        {currentFaq.map((item, index) => (
+                            <div key={index}>
+                                <dt>
+                                    <strong>{item.question}</strong>
+                                </dt>
+                                <dd>{item.answer}</dd>
+                            </div>
+                        ))}
+                    </dl>
+                </section>
+                <hr />
             </div>
         </div>
     );

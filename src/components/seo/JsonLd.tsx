@@ -137,4 +137,20 @@ export function artGallerySchema(
     };
 }
 
+export function faqPageSchema(
+    items: { question: string; answer: string }[],
+): Record<string, unknown> {
+    return {
+        '@type': 'FAQPage',
+        mainEntity: items.map((item) => ({
+            '@type': 'Question',
+            name: item.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: item.answer,
+            },
+        })),
+    };
+}
+
 export { SITE_URL };
