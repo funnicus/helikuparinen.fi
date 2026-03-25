@@ -1,0 +1,23 @@
+{
+    "name": "Heli Kuparinen — Visual Artist",
+    "short_name": "Heli Kuparinen",
+    "description": "Official website of Heli Kuparinen, a Helsinki-based visual artist and painter.",
+    "start_url": "/",
+    "display": "browser",
+    "background_color": "#ffffff",
+    "theme_color": "#242424",
+    "lang": "fi",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "48x48",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "/profile-heli.png",
+            "sizes": "300x300",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}

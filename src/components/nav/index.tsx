@@ -9,17 +9,18 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 import navStyles from './nav.module.scss';
 
 const Nav = (): JSX.Element => {
-    const [style, setStyle] = useState(true);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const [{ theme }] = useStateValue();
     //query erittäin tärkeä eikä tästä löydy tietoa mistään!
     const { locale, pathname, query, events } = useRouter();
     const { width } = useWindowDimensions();
 
-    const toggleMenu = (state?: boolean) => setStyle(state || !style);
+    const toggleMenu = (state?: boolean) =>
+        setMenuOpen(state !== undefined ? state : !menuOpen);
 
     useEffect(() => {
-        const handleRouteChange = () => toggleMenu(true);
+        const handleRouteChange = () => toggleMenu(false);
 
         events.on('routeChangeComplete', handleRouteChange);
 
@@ -29,21 +30,37 @@ const Nav = (): JSX.Element => {
     const text = locale === 'fi-FI' ? 'In English' : 'Suomeksi';
     const nextLocale = locale === 'fi-FI' ? 'en-US' : 'fi-FI';
 
+    const isMobile = width < 770;
+    const navHidden = !menuOpen && isMobile;
+
     return (
         <div>
             <button
                 className={navStyles.dropdownBtn}
                 onClick={() => toggleMenu()}
+                aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={menuOpen}
+                aria-controls="main-nav"
             >
-                {!style ? <FaTimes /> : <FaBars />}
+                {menuOpen ? <FaTimes /> : <FaBars />}
             </button>
             <nav
+                id="main-nav"
                 className={navStyles.Navbar}
                 style={
-                    style && width < 770
-                        ? { display: 'none' }
-                        : { display: 'flex' }
+                    navHidden
+                        ? {
+                              visibility: 'hidden',
+                              opacity: 0,
+                              pointerEvents: 'none',
+                          }
+                        : {
+                              visibility: 'visible',
+                              opacity: 1,
+                              pointerEvents: 'auto',
+                          }
                 }
+                aria-hidden={navHidden}
             >
                 <ul className={navStyles.Left} style={{ color: theme.color }}>
                     <li>

@@ -66,6 +66,20 @@
     }
 }
 
+.navHidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: visibility 0.2s, opacity 0.2s ease-in-out;
+}
+
+.navVisible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: visibility 0.2s, opacity 0.2s ease-in-out;
+}
+
 @media only screen and (max-width: 770px) {
     .Navbar {
         position: fixed;
