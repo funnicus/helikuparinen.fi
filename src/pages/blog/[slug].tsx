@@ -131,25 +131,31 @@ export const getStaticProps: GetStaticProps = async ({
         locale,
     });
 
-    const post = data[0];
+    const post = data?.[0];
+
+    if (!post) {
+        return {
+            notFound: true,
+            revalidate: 200,
+        };
+    }
 
     return {
         props: {
             preview,
-            post: post ?? null,
+            post,
         },
         revalidate: 200,
     };
 };
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-    const allPosts = await getContent<Blog>('en-US', 'post');
-
     const paths: { params: { slug: string }; locale: string }[] = [];
 
-    for (const locale of locales) {
+    for (const locale of locales ?? []) {
+        const posts = await getContent<Blog>(locale, 'post');
         const localePaths =
-            allPosts?.map((post) => ({
+            posts?.map((post) => ({
                 params: { slug: post.fields.slug },
                 locale,
             })) ?? [];

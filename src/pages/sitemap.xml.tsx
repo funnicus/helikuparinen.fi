@@ -7,13 +7,19 @@ const SITE_URL = 'https://helikuparinen.fi';
 const staticPages = ['', '/about', '/paintings', '/blog'];
 const locales = ['fi-FI', 'en-US'];
 
+type BlogRoute = {
+    id: string;
+    locale: string;
+    slug: string;
+};
+
 function getLocalePath(locale: string, path: string): string {
     // fi-FI is the default locale, so no prefix
     if (locale === 'fi-FI') return `${SITE_URL}${path}`;
     return `${SITE_URL}/${locale}${path}`;
 }
 
-function generateSitemap(blogSlugs: string[]): string {
+function generateSitemap(blogRoutes: BlogRoute[]): string {
     const urls: string[] = [];
 
     for (const page of staticPages) {
@@ -38,27 +44,38 @@ ${xDefault}
         }
     }
 
-    for (const slug of blogSlugs) {
-        const path = `/blog/${slug}`;
-        for (const locale of locales) {
-            const loc = getLocalePath(locale, path);
-            const alternates = locales
-                .map(
-                    (l) =>
-                        `      <xhtml:link rel="alternate" hreflang="${l.split('-')[0]}" href="${getLocalePath(l, path)}" />`,
-                )
-                .join('\n');
-            const xDefault = `      <xhtml:link rel="alternate" hreflang="x-default" href="${getLocalePath('fi-FI', path)}" />`;
+    const blogRoutesByEntry = blogRoutes.reduce<
+        Record<string, Record<string, string>>
+    >((entries, route) => {
+        entries[route.id] = {
+            ...(entries[route.id] ?? {}),
+            [route.locale]: route.slug,
+        };
+        return entries;
+    }, {});
 
-            urls.push(`
+    for (const route of blogRoutes) {
+        const localizedSlugs = blogRoutesByEntry[route.id];
+        const path = `/blog/${route.slug}`;
+        const alternates = locales
+            .filter((locale) => localizedSlugs[locale])
+            .map(
+                (locale) =>
+                    `      <xhtml:link rel="alternate" hreflang="${locale.split('-')[0]}" href="${getLocalePath(locale, `/blog/${localizedSlugs[locale]}`)}" />`,
+            )
+            .join('\n');
+        const xDefaultLocale = localizedSlugs['fi-FI'] ? 'fi-FI' : route.locale;
+        const xDefaultSlug = localizedSlugs[xDefaultLocale];
+        const xDefault = `      <xhtml:link rel="alternate" hreflang="x-default" href="${getLocalePath(xDefaultLocale, `/blog/${xDefaultSlug}`)}" />`;
+
+        urls.push(`
     <url>
-      <loc>${loc}</loc>
+      <loc>${getLocalePath(route.locale, path)}</loc>
 ${alternates}
 ${xDefault}
       <changefreq>monthly</changefreq>
       <priority>0.6</priority>
     </url>`);
-        }
     }
 
     return `<?xml version="1.0" encoding="UTF-8"?>
@@ -75,16 +92,30 @@ export default function Sitemap(): null {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-    let blogSlugs: string[] = [];
+    const blogRoutes = (
+        await Promise.all(
+            locales.map(async (locale) => {
+                try {
+                    const posts = await getContent<Post>(locale, 'post');
+                    return (
+                        posts?.map((post) => ({
+                            id: post.sys.id,
+                            locale,
+                            slug: post.fields.slug,
+                        })) ?? []
+                    );
+                } catch (error) {
+                    console.error(
+                        `Failed to fetch ${locale} blog posts for sitemap:`,
+                        error,
+                    );
+                    return [];
+                }
+            }),
+        )
+    ).flat();
 
-    try {
-        const posts = await getContent<Post>('en-US', 'post');
-        blogSlugs = posts?.map((post) => post.fields.slug) ?? [];
-    } catch (error) {
-        console.error('Failed to fetch blog posts for sitemap:', error);
-    }
-
-    const sitemap = generateSitemap(blogSlugs);
+    const sitemap = generateSitemap(blogRoutes);
 
     res.setHeader('Content-Type', 'application/xml');
     res.setHeader(

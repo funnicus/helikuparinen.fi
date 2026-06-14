@@ -1,4 +1,4 @@
-import { Properties } from 'csstype';
+import type { Properties } from 'csstype';
 
 // add types here when you modify state!
 export type State = {

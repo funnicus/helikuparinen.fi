@@ -4,6 +4,7 @@ import { FC } from 'react';
 
 const SITE_URL = 'https://helikuparinen.fi';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/profile-heli.png`;
+const LOCALES = ['fi-FI', 'en-US'];
 
 interface SeoProps {
     title: string;
@@ -14,9 +15,29 @@ interface SeoProps {
     noindex?: boolean;
 }
 
+function getCanonicalPath(path: string): string {
+    const [pathWithoutHash] = path.split('#');
+    const [pathWithoutQuery] = pathWithoutHash.split('?');
+    const normalizedPath = pathWithoutQuery.startsWith('/')
+        ? pathWithoutQuery
+        : `/${pathWithoutQuery}`;
+    const pathWithoutLocale =
+        LOCALES.reduce((currentPath, currentLocale) => {
+            if (currentPath === `/${currentLocale}`) return '/';
+            if (currentPath.startsWith(`/${currentLocale}/`)) {
+                return currentPath.replace(`/${currentLocale}`, '');
+            }
+            return currentPath;
+        }, normalizedPath) || '/';
+
+    return pathWithoutLocale;
+}
+
 function getLocalePath(locale: string, path: string): string {
-    if (locale === 'fi-FI') return `${SITE_URL}${path}`;
-    return `${SITE_URL}/${locale}${path}`;
+    const canonicalPath = getCanonicalPath(path);
+
+    if (locale === 'fi-FI') return `${SITE_URL}${canonicalPath}`;
+    return `${SITE_URL}/${locale}${canonicalPath}`;
 }
 
 const Seo: FC<SeoProps> = ({
@@ -29,7 +50,8 @@ const Seo: FC<SeoProps> = ({
 }) => {
     const { locale, asPath } = useRouter();
 
-    const canonicalUrl = getLocalePath(locale, asPath);
+    const canonicalPath = getCanonicalPath(asPath);
+    const canonicalUrl = getLocalePath(locale, canonicalPath);
     const image = ogImage || DEFAULT_OG_IMAGE;
     const imageAlt = ogImageAlt || title;
     const ogLocale = locale === 'fi-FI' ? 'fi_FI' : 'en_US';
@@ -49,17 +71,17 @@ const Seo: FC<SeoProps> = ({
             <link
                 rel="alternate"
                 hrefLang="fi"
-                href={getLocalePath('fi-FI', asPath)}
+                href={getLocalePath('fi-FI', canonicalPath)}
             />
             <link
                 rel="alternate"
                 hrefLang="en"
-                href={getLocalePath('en-US', asPath)}
+                href={getLocalePath('en-US', canonicalPath)}
             />
             <link
                 rel="alternate"
                 hrefLang="x-default"
-                href={getLocalePath('fi-FI', asPath)}
+                href={getLocalePath('fi-FI', canonicalPath)}
             />
 
             {/* Open Graph */}

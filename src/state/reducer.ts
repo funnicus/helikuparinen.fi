@@ -1,4 +1,4 @@
-import { Properties } from 'csstype';
+import type { Properties } from 'csstype';
 import { State, Action } from '@/types/state';
 
 export const reducer = (state: State, action: Action): State => {
