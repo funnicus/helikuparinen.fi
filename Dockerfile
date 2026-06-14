@@ -1,44 +1,50 @@
-FROM node:20-alpine
+FROM node:24-alpine AS base
 
-EXPOSE 3000
+ENV NEXT_TELEMETRY_DISABLED=1
+WORKDIR /app
 
-WORKDIR /usr/src/app
+RUN corepack enable
 
-# Enable pnpm via corepack
-RUN corepack enable && corepack prepare pnpm@latest --activate
+FROM base AS deps
 
-# https://www.gyanblog.com/javascript/nextjs-how-build-docker-with-api-url/
-# ARG
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
+FROM base AS builder
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
 ARG SPACE_ID
 ARG ACCESS_TOKEN
 ARG PREVIEW_ACCESS_TOKEN
+ARG NEXT_PUBLIC_GOOGLE_ANALYTICS
 
-ARG EMAILUSER
-ARG EMAILPASS
-ARG TO
-ARG GA
-
-# ENV
 ENV SPACE_ID=$SPACE_ID
 ENV ACCESS_TOKEN=$ACCESS_TOKEN
 ENV PREVIEW_ACCESS_TOKEN=$PREVIEW_ACCESS_TOKEN
+ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=$NEXT_PUBLIC_GOOGLE_ANALYTICS
 
-ENV EMAILUSER=$EMAILUSER
-ENV EMAILPASS=$EMAILPASS
-ENV TO=$TO
-ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=$GA
-
-# Copy lockfile and manifests first for better layer caching
-COPY pnpm-lock.yaml package.json ./
-
-RUN pnpm fetch
-
-# Copy the rest of the source
-COPY . .
-
-RUN pnpm install --frozen-lockfile
-RUN pnpm add sharp
 RUN pnpm build
+RUN pnpm prune --prod
 
-# And finally the command to run the application
-CMD ["pnpm", "start"]
+FROM base AS runner
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
+COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./next.config.js
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["node", "node_modules/next/dist/bin/next", "start"]

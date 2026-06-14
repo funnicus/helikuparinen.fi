@@ -8,7 +8,7 @@ The site is deployed at [https://helikuparinen.fi](https://helikuparinen.fi)!
 
 ## Developing this site 🚀
 
-You will need **Node.js v20+** and **pnpm** installed.
+You will need **Node.js v22.12+** and **pnpm** installed.
 
 To install pnpm (if you don't have it already):
 
@@ -75,24 +75,27 @@ sudo systemctl restart nginx
 
 ### Docker
 
-Run the following command with env variables to build an image:
+Run the following command with the Contentful variables required for static
+generation:
 
 ```sh
 docker build \
   --build-arg SPACE_ID=<here> \
   --build-arg ACCESS_TOKEN=<here> \
   --build-arg PREVIEW_ACCESS_TOKEN=<here> \
-  --build-arg EMAILUSER=<here> \
-  --build-arg EMAILPASS=<here> \
-  --build-arg TO=<here> \
-  --build-arg GA=<analytics tag here> \
+  --build-arg NEXT_PUBLIC_GOOGLE_ANALYTICS=<analytics tag here> \
   -t helikuparinen.fi .
 ```
 
-And to run the container:
+Pass email credentials at runtime instead of baking them into the image:
 
 ```sh
-docker run -p 3000:3000 helikuparinen.fi
+docker run \
+  -p 3000:3000 \
+  -e EMAILUSER=<here> \
+  -e EMAILPASS=<here> \
+  -e TO=<here> \
+  helikuparinen.fi
 ```
 
 ## More comprehensive documentation
