@@ -2,6 +2,7 @@
     "name": "helikuparinen.fi",
     "version": "0.1.0",
     "private": false,
+    "packageManager": "pnpm@10.26.2",
     "engines": {
         "node": ">=22.12.0"
     },
@@ -15,9 +16,13 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build --webpack",
+        "audit:critical": "pnpm audit --audit-level critical",
+        "format": "prettier --write . --ignore-unknown",
+        "format:check": "prettier --check . --ignore-unknown",
         "knip": "knip",
+        "lint": "eslint .",
         "start": "next start",
-        "lint": "eslint ./ --ext js,jsx,ts,tsx"
+        "typecheck": "tsc --noEmit"
     },
     "dependencies": {
         "@contentful/rich-text-react-renderer": "^14.1.3",
@@ -32,6 +37,7 @@
         "xss": "^1.0.15"
     },
     "devDependencies": {
+        "@eslint/js": "^9.39.3",
         "@types/gtag.js": "^0.0.20",
         "@types/node": "^20.17.0",
         "@types/nodemailer": "^6.4.17",
@@ -42,7 +48,9 @@
         "csstype": "3.2.3",
         "eslint": "^9.0.0",
         "eslint-plugin-react": "^7.37.0",
+        "globals": "^17.6.0",
         "knip": "^6.16.1",
+        "prettier": "^3.8.4",
         "typescript": "^5.7.0"
     }
 }

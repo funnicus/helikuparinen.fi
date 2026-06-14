@@ -1,48 +1,62 @@
-# Main deployment pipeline for helikuparinen.fi
-
-name: Deployment pipeline
+name: Main checks
 
 on:
     push:
         branches:
             - master
     pull_request:
-        branches: [master]
-        types: [opened, synchronize]
+        branches:
+            - master
+        types:
+            - opened
+            - synchronize
+            - reopened
+
+permissions:
+    contents: read
 
 jobs:
-    main-deploy_pipeline:
-        runs-on: ubuntu-18.04
+    checks:
+        name: Quality checks
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v4
               with:
-                  node-version: '18.x'
-            - name: npm install
-              run: npm install --legacy-peer-deps
-            - name: lint
-              run: npm run lint
-            - name: npm run build
-              run: npm run build
+                  run_install: false
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Check formatting
+              run: pnpm format:check
+
+            - name: Lint
+              run: pnpm lint
+
+            - name: Typecheck
+              run: pnpm typecheck
+
+            - name: Check dead code
+              run: pnpm knip
+
+            - name: Audit dependencies
+              run: pnpm audit:critical
+
+            - name: Build
+              run: pnpm build
               env:
                   SPACE_ID: ${{ secrets.SPACE_ID }}
                   ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                   PREVIEW_ACCESS_TOKEN: ${{ secrets.PREVIEW_ACCESS_TOKEN }}
-            - name: Deploy
-              if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-              uses: appleboy/ssh-action@master
-              with:
-                  host: ${{ secrets.SSH_HOST }}
-                  USERNAME: ${{ secrets.SSH_USER }}
-                  KEY: ${{ secrets.SSH_KEY }}
-                  PORT: ${{ secrets.SSH_PORT }}
-                  script: |
-                      cd ./helikuparinen.fi/
-                      NODE_ENV=prod
-                      sh ./deploy.sh
-            - uses: actions/checkout@v2
-            - name: Bump version and push tag
-              if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-              uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598 # let's use a hash version
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

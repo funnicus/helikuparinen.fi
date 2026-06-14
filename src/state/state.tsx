@@ -33,8 +33,6 @@ export const StateProvider: FC<StateProviderProps> = ({
     );
 };
 
-// no thank you :D
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useStateValue = () => useContext(StateContext);
 
 type StateProviderProps = {

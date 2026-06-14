@@ -9,7 +9,7 @@ const client = createClient({
 
 export const getSingleContent = async <T>(
     locale: string,
-    type: ContentType
+    type: ContentType,
 ): Promise<T> => {
     const response = await client.getEntries({
         content_type: type,
@@ -22,7 +22,7 @@ export const getSingleContent = async <T>(
 
 export const getContent = async <T>(
     locale: string,
-    type: ContentType
+    type: ContentType,
 ): Promise<Entry<T>[]> => {
     const response = await client.getEntries({
         content_type: type,

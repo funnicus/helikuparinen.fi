@@ -24,7 +24,7 @@ To give you an example, I have a file called helikuparinen.fi, which contains al
 
 ### Server blocks
 
-Whats inside those files in sites-available anyway? The file helikuparinen.fi contains something like this: 
+Whats inside those files in sites-available anyway? The file helikuparinen.fi contains something like this:
 
 ```nginx
 server {

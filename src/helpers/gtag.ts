@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /**
  * Helper functions for Google Analytics
  * https://hoangtrinhj.com/using-google-analytics-with-next-js

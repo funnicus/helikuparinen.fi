@@ -2,12 +2,11 @@ import type { Properties } from 'csstype';
 
 // add types here when you modify state!
 export type State = {
-    theme: Properties
+    theme: Properties;
 };
 
 // add actions here when you modify state!
-export type Action =
-    | {
-        type: 'CHANGE_THEME';
-        payload: Properties; //css properties for inline styles
-      }
+export type Action = {
+    type: 'CHANGE_THEME';
+    payload: Properties; //css properties for inline styles
+};

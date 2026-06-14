@@ -5,7 +5,7 @@ import { getContent } from '@/services/contentful';
 
 export default async (
     req: NextApiRequest,
-    res: NextApiResponse
+    res: NextApiResponse,
 ): Promise<void> => {
     //1
     const response = await getContent('fi-FI', 'post');

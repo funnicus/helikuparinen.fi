@@ -15,7 +15,6 @@ const getScrollPosition = ({
     element,
     useWindow,
 }: {
-    // eslint-disable-next-line
     element?: ElementRef;
     useWindow?: boolean;
 }) => {
@@ -34,7 +33,7 @@ export default function useScrollPosition(
     deps?: DependencyList,
     element?: ElementRef,
     useWindow?: boolean,
-    wait?: number
+    wait?: number,
 ): void {
     const position = useRef(getScrollPosition({ useWindow }));
 

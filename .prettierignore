@@ -1,0 +1,8 @@
+node_modules
+.next
+out
+coverage
+next-env.d.ts
+pnpm-lock.yaml
+pnpm-workspace.yaml
+tsconfig.tsbuildinfo

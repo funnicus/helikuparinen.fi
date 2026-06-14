@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { useEffect } from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';

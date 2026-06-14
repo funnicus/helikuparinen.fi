@@ -1,33 +1,33 @@
 .Header {
-  text-align: center;
-	font-family: sans-serif;
-	height: 100vh;
+    text-align: center;
+    font-family: sans-serif;
+    height: 100vh;
 }
 
 .Header header {
-	height: 100%;
-  padding: 35vh 0 0;
-	color: #000000;
+    height: 100%;
+    padding: 35vh 0 0;
+    color: #000000;
 }
 
 .Header h1 {
-  font-size: 4em;
-  margin: auto;
-	color: #000000;
+    font-size: 4em;
+    margin: auto;
+    color: #000000;
 }
 
 .Header h1 {
-  animation: fadeInHeader 2s ease-in both;
-	animation-delay: 2s;
+    animation: fadeInHeader 2s ease-in both;
+    animation-delay: 2s;
 }
 
 @keyframes fadeInHeader {
-	0% {
-		opacity: 0;
-		transform: translate3d(0, -20%, 0);
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -20%, 0);
     }
-	100% {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-	}
+    100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
 }

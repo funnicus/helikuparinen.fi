@@ -20,15 +20,15 @@ Our contentful space contains the following models:
 
 These models should be used in hierarchically like this:
 
--   Biography
--   Curriculum - curriculum contains sections
-    -   cv section - sections contain entries
-        -   cv entry
-        -   cv entry 2
--   Statement
--   Gallery - gallery contains collections
-    -   Collection
--   Post
+- Biography
+- Curriculum - curriculum contains sections
+    - cv section - sections contain entries
+        - cv entry
+        - cv entry 2
+- Statement
+- Gallery - gallery contains collections
+    - Collection
+- Post
 
 There should only ever exist one entry of the top level content types so don't add more of those!
 
