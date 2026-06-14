@@ -11,7 +11,6 @@ import JsonLd, {
     faqPageSchema,
     SITE_URL,
 } from '@/components/seo/JsonLd';
-import Breadcrumb from '@/components/breadcrumb';
 
 import { getSingleContent, getContent } from '@/services/contentful';
 import { AboutProps, Curriculum as CV } from '@/types/contentful';
@@ -122,15 +121,6 @@ const About = ({ bio, curriculum, statement }: AboutProps): JSX.Element => {
                         },
                     ]),
                     faqPageSchema(currentFaq),
-                ]}
-            />
-            <Breadcrumb
-                items={[
-                    { label: 'Heli Kuparinen', href: '/' },
-                    {
-                        label: isFi ? 'Tietoa minusta' : 'About Me',
-                        href: '/about',
-                    },
                 ]}
             />
             {width > 950 ? (

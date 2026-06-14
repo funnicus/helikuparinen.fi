@@ -10,7 +10,6 @@ import JsonLd, {
     breadcrumbSchema,
     SITE_URL,
 } from '@/components/seo/JsonLd';
-import Breadcrumb from '@/components/breadcrumb';
 import { getContent } from '@/services/contentful';
 import { PaintingsProps, Gallery, File } from '@/types/contentful';
 
@@ -78,15 +77,6 @@ const Paintings = ({ gallery }: PaintingsProps): JSX.Element => {
                             url: `${SITE_URL}${localePath}/paintings`,
                         },
                     ]),
-                ]}
-            />
-            <Breadcrumb
-                items={[
-                    { label: 'Heli Kuparinen', href: '/' },
-                    {
-                        label: isFi ? 'Teokset' : 'Paintings',
-                        href: '/paintings',
-                    },
                 ]}
             />
             {imageFile ? (

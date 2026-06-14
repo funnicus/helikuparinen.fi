@@ -16,7 +16,6 @@ import JsonLd, {
     blogPostingSchema,
     breadcrumbSchema,
 } from '@/components/seo/JsonLd';
-import Breadcrumb from '@/components/breadcrumb';
 import slugStyles from './slug.module.css';
 
 const Post: FC<Props> = ({ post }) => {
@@ -73,19 +72,6 @@ const Post: FC<Props> = ({ post }) => {
                 ogImageAlt={post.fields.cover.fields.title}
             />
             <JsonLd data={jsonLdData} />
-            <Breadcrumb
-                items={[
-                    { label: 'Heli Kuparinen', href: '/' },
-                    {
-                        label: isFi ? 'Blogi' : 'Blog',
-                        href: '/blog',
-                    },
-                    {
-                        label: post.fields.title,
-                        href: `/blog/${post.fields.slug}`,
-                    },
-                ]}
-            />
             <article>
                 <Image
                     src={ogImage}

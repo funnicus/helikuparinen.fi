@@ -7,7 +7,6 @@ import { Entry } from 'contentful';
 
 import Seo from '@/components/seo';
 import JsonLd, { breadcrumbSchema, SITE_URL } from '@/components/seo/JsonLd';
-import Breadcrumb from '@/components/breadcrumb';
 import { useStateValue, setTheme } from '@/state/index';
 import { getContent } from '@/services/contentful';
 import { Post } from '@/types/contentful';
@@ -47,12 +46,6 @@ const Blog = ({ posts }: Props): JSX.Element => {
         <div className={blogStyles.Blog}>
             <Seo title={title} description={description} />
             <JsonLd data={breadcrumb} />
-            <Breadcrumb
-                items={[
-                    { label: 'Heli Kuparinen', href: '/' },
-                    { label: isFi ? 'Blogi' : 'Blog', href: '/blog' },
-                ]}
-            />
             <section className={blogStyles.posts}>
                 <h1>{isFi ? 'Blogi' : 'Blog'}</h1>
                 {posts
