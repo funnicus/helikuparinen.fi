@@ -2,11 +2,11 @@
 import { FC, ReactNode } from 'react';
 import { BLOCKS, MARKS, INLINES } from '@contentful/rich-text-types';
 
-export const Bold: FC<OptionsProps> = ({ children }) => <strong>{children}</strong>;
+const Bold: FC<OptionsProps> = ({ children }) => <strong>{children}</strong>;
 
-export const Text: FC<OptionsProps> = ({ children }) => <p>{children}</p>;
+const Text: FC<OptionsProps> = ({ children }) => <p>{children}</p>;
 
-export const H1: FC<OptionsProps> = ({ children }) => <h1 style={{ fontSize: '3em' }}>{children}</h1>;
+const H1: FC<OptionsProps> = ({ children }) => <h1 style={{ fontSize: '3em' }}>{children}</h1>;
 
 Bold.displayName = 'BOLD';
 Text.displayName = 'PARAGRPH';

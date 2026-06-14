@@ -106,4 +106,3 @@ const Seo: FC<SeoProps> = ({
 };
 
 export default Seo;
-export { SITE_URL, DEFAULT_OG_IMAGE };

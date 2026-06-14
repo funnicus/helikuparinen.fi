@@ -2,7 +2,7 @@ import { Entry, createClient } from 'contentful';
 
 import { ContentType, GetEntriesOpts } from '@/types/contentful';
 
-export const client = createClient({
+const client = createClient({
     space: process.env.SPACE_ID,
     accessToken: process.env.ACCESS_TOKEN,
 });

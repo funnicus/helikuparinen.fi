@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import styles from './breadcrumb.module.css';
 
-export interface BreadcrumbItem {
+interface BreadcrumbItem {
     label: string;
     href: string;
 }

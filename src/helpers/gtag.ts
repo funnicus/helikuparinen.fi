@@ -12,14 +12,3 @@ export const pageview = (url: string): void => {
         });
     }
 };
-
-// https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const event = ({ action, category, label, value }): void => {
-    if (typeof window !== 'undefined' && typeof window.gtag !== 'undefined') {
-        window.gtag('event', action, {
-            event_category: category,
-            event_label: label,
-            value: value,
-        });
-    }
-};

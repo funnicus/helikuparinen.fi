@@ -16,12 +16,12 @@ const mail = async (mailObject: Mail): Promise<Response> => {
     return (await response.json()) as Response;
 };
 
-export type Mail = {
+type Mail = {
     email: string;
     message: string;
 };
 
-export type Response = {
+type Response = {
     status: 'success' | 'fail';
 };
 

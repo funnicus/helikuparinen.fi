@@ -103,7 +103,7 @@ export function blogPostingSchema(post: {
     };
 }
 
-export function visualArtworkSchema(painting: {
+function visualArtworkSchema(painting: {
     name: string;
     description?: string;
     imageUrl: string;

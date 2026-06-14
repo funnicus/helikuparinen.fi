@@ -16,7 +16,7 @@ const initialState: State = {
     },
 };
 
-export const StateContext = createContext<[State, Dispatch<Action>]>([
+const StateContext = createContext<[State, Dispatch<Action>]>([
     initialState,
     () => initialState,
 ]);
